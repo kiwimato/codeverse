@@ -8,7 +8,7 @@
 #   python3 tools/refresh-csp.py
 
 /*
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-1/7wHHLoHk1iWwBSIbdIRFw5tWs84k6WyGarBJ3OCTo=' 'sha256-D0/Gm7MQewbRJrSxnbojQlfZmqqqwkja/tsKRsntMsY=' 'sha256-Px3pCA7EbXYbIP3xLbnxRqqlxoMnJoH/dJh7cdh/RRw=' 'sha256-a/TUjRAizMMu2ehDrBPlQMBtAdBCswHOLFPnB1ucSGA=' 'sha256-fkYp28+IvAbNBsQu9N0N/Tq/UVwGXVdEZwrLtqMvRt4=' 'sha256-mPxGp30QjmarJPiSGD+fIhefYaCY3OY140xD/wXSYXM=' 'sha256-qJt6Gdakg2/xA6a3XRSBLyW+QxhdzrV7vQaMasPWOZ0='; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; form-action 'none'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-MOM2mTmMYfubl1MD6y94JTIhSS3oXdY5ecxmC57YlfE=' 'sha256-PM6FKtOHoUuZWrY32OV5nEZOfJ1YW252yMMUuqnPeRA=' 'sha256-Yz9dMdM4vCNob3Gn0FtiZeh8xgGU6obFO/UAj3ozJSc=' 'sha256-cpeBLj4VeKUqafdQkWEy2LGmtWfPn4tcYs9suBI278c=' 'sha256-eIvtDua2W5nfb+G6PhAEl07QRQmGwPYd+YOPGcG6Jf4=' 'sha256-ia4z2L30/mhdi/FmMMvc6T3+oHw+6EhW/qFE0+3h0TY=' 'sha256-nKHQQfnNCkdUMqLmyADfyaqTullrHMFck7EOwWdUA/E='; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; form-action 'none'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin

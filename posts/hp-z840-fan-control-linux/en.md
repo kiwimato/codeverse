@@ -1,6 +1,6 @@
 ---
 title: Driving the chassis fans on an HP Z840 from Linux
-description: The Z840's fan controller hangs off the embedded controller's private SMBus, where lm-sensors cannot see it. hpz-ecfan reaches it through the EC's own mailbox instead.
+description: The Z840's fan controller sits on the embedded controller's private SMBus, out of reach of lm-sensors. hpz-ecfan talks to it through the EC's own mailbox.
 date: 2026-09-30
 tags: opensource, homelab
 ---
@@ -13,37 +13,35 @@ tags: opensource, homelab
   - a `status` screenshot or a before/after noise figure
 -->
 
-Some problems only exist because a vendor decided you did not need to solve them. The HP
-Z840 is one of those: a capable workstation whose chassis fans run at whatever profile
-the BIOS picked at boot, with no way to say otherwise from the operating system.
+The HP Z840 is a capable workstation, but its chassis fans run at whatever profile the
+BIOS picked at boot, and HP gives you no way to change that from the operating system,
+as if nobody would ever want to.
 
-So I wrote one. [`hpz-ecfan`](https://github.com/kiwimato/hpz-ecfan) is a small Python
-tool that moves the fan curve on Z-series workstations from Linux — no kernel module, no
-reboot, no firmware patch.
+So I wrote it myself. [`hpz-ecfan`](https://github.com/kiwimato/hpz-ecfan) is a small Python
+tool that moves the fan curve on Z-series workstations from Linux. It needs no kernel
+module, no reboot and no firmware patch.
 
 ## Why the normal tools see nothing
 
-The obvious approach fails immediately. `lm-sensors` finds no fan controller. `fancontrol`
-has nothing to control. The `adt7475` kernel driver, which is exactly the right driver,
-never binds.
+`lm-sensors` finds no fan controller, so `fancontrol` has nothing to control. The
+`adt7475` kernel driver, which is the right driver for this chip, never binds.
 
-The reason is topology. The chip driving the chassis fans is an ON Semiconductor
-**NCT7491** — an ADT7475-family part, thoroughly documented in a public datasheet. But it
-does not sit on the SMBus that the PCH owns. It sits on the *private* bus of the Nuvoton
-embedded controller, and `i2c-i801` has no path to it. The chip is right there, fully
-standard, and completely unreachable.
+The chip driving the chassis fans is an ON Semiconductor **NCT7491**, an ADT7475-family
+part documented in detail in a public datasheet. It does not sit on the SMBus that the
+PCH owns, though. It sits on the *private* bus of the Nuvoton embedded controller, and
+`i2c-i801` has no path to it, so a completely standard chip ends up out of reach.
 
-HP's own ACPI and WMI expose part of the picture — the `hp-wmi-sensors` driver will happily
-read temperatures and fan speeds. The read side is public. The write side is not.
+HP's own ACPI and WMI expose some of it: the `hp-wmi-sensors` driver reads temperatures
+and fan speeds without complaint. So reading is public, but writing is not.
 
 ## The mailbox
 
-The write side turned out to be recoverable from HP's `HhmDxe` firmware module, which
-programs the chip at every POST. It has to reach the NCT7491 somehow, and the mechanism it
-uses is a small SMBus proxy living in the EC's RAM window.
+The write side could be recovered from HP's `HhmDxe` firmware module, which programs the
+chip at every POST. It has to reach the NCT7491 somehow, and it does so through a small
+SMBus proxy in the EC's RAM window.
 
-That window sits at I/O ports `0x800`–`0x8FE`, page-selected through `0x8FF`. Page 0
-contains the proxy:
+That window is at I/O ports `0x800` to `0x8FE`, with the page selected through `0x8FF`.
+Page 0 holds the proxy:
 
 | byte | meaning |
 |------|---------|
@@ -56,37 +54,37 @@ contains the proxy:
 
 A read is `E5=dev, E8=reg, E7=1, E6=1, F0=1`, then poll until `F0` bit 0 goes low and take
 the result out of `E8`. A write is `E5=dev, E8=val, E9=reg, E7=2, E6=0, F0=1` and the same
-poll. That is the entire protocol.
+poll. There is nothing more to the protocol.
 
 ## Two things the protocol does not give you
 
-**There is no error flag.** A NACK on the bus completes exactly like a success: `F0` bit 0
-clears, and `E8` is left holding whatever was already there. A failed read returns stale
-data that looks perfectly plausible. The only defence is to read every write back and
-compare — which the tool does, without exception.
+First, there is no error flag. A NACK on the bus completes exactly like a success: `F0`
+bit 0 clears, and `E8` keeps whatever was already in it. A failed read returns stale data
+that looks perfectly plausible. The only defence is to read every write back and compare,
+and the tool does that for every write.
 
-**There is no arbitration.** The mailbox is a handful of shared bytes. Two processes
+Second, there is no arbitration. The mailbox is a handful of shared bytes. Two processes
 stepping through the sequence at the same time will interleave their writes and corrupt
-each other's data byte, and because of the missing error flag, neither will notice. Every
-transaction therefore goes through an `flock` on `/var/lock/ecmbox` (override with
-`--lock` or `HPZ_EC_LOCK`). It is not optional.
+each other's data byte, and with no error flag neither will notice. So every transaction
+takes an `flock` on `/var/lock/ecmbox` (override the path with `--lock` or
+`HPZ_EC_LOCK`). The lock itself is not optional.
 
-## Failing toward cold
+## Failing safe
 
-The tempting design is to take the chip out of its automatic mode and drive the PWM duty
-directly. It is simpler to reason about and it gives precise control. It is also the wrong
-choice, because it makes a daemon crash into a thermal event.
+Taking the chip out of its automatic mode and driving the PWM duty directly would be
+simpler to reason about and would give precise control. But then a daemon crash becomes a
+thermal event.
 
-Instead the tool stays inside the chip's own automatic loop and moves the shape of the
-curve: the floor (`PWMmin`) or the knee (`Tmin`). The NCT7491 goes on doing its own
-temperature-driven regulation exactly as the BIOS configured it — it is just working from
-different numbers. If the tool dies, gets killed, or the machine loses the process
-entirely, the fans keep regulating. The THERM limits stay armed throughout.
+So the tool stays inside the chip's own automatic loop and only moves the shape of the
+curve: the floor (`PWMmin`) or the knee (`Tmin`). The NCT7491 keeps regulating on
+temperature exactly as the BIOS configured it, just with different numbers. If the tool
+dies, gets killed, or the machine loses the process entirely, the fans keep regulating,
+and the THERM limits stay armed throughout.
 
-Everything else follows the same rule. The tool refuses to write if the chip's LOCK bit is
-set. It refuses to run at all on a machine whose DMI product name is not an HP Z unless
-you pass `--force`. Every failure direction it can choose, it chooses the one that ends
-with more airflow rather than less.
+The rest of the design follows the same rule. The tool refuses to write if the chip's
+LOCK bit is set, and refuses to run at all on a machine whose DMI product name is not an
+HP Z unless you pass `--force`. Wherever it has a choice of how to fail, it picks the
+option that ends with more airflow.
 
 ## Using it
 
@@ -109,21 +107,21 @@ python3 -m hpz_ecfan.cli log --interval 30
 ```
 
 On the Z840, tach1 and tach2 are the rear fans on PWM1 and PWM2; tach3 and tach4 are the
-front pair, both driven by PWM3. It needs `/dev/port`, so root or `CAP_SYS_RAWIO` — which
+front pair, both driven by PWM3. It needs `/dev/port`, so root or `CAP_SYS_RAWIO`, which
 also means it runs fine from a privileged container.
 <!-- TODO: mention your own Unraid setup here if you want -->
 
-Nothing survives a power cycle: that resets both the EC and the chip to BIOS defaults. A
-warm reboot re-runs POST, which rewrites the chip anyway. Whatever you set is a runtime
-change, which is another way of saying the machine is never more than a reboot away from
-its factory behaviour.
+Nothing survives a power cycle, which resets both the EC and the chip to BIOS defaults.
+A warm reboot re-runs POST, and that rewrites the chip anyway. Everything you set is a
+runtime change, so the machine is never more than a reboot away from its factory
+behaviour.
 
 ## Status
 
-Tested live on a Z840 with BIOS M60 v02.56. Other Z-series boards very likely share the
-same EC and the same mailbox, but may well wire their fans to different PWM outputs — run
-`dump` and `status` and read what you get before writing anything. Reports from other
-boards are welcome.
+I have tested it live on a Z840 with BIOS M60 v02.56. Other Z-series boards very likely
+share the same EC and the same mailbox, but they may wire their fans to different PWM
+outputs, so run `dump` and `status` and read the output before writing anything. Reports
+from other boards are welcome.
 
 The full protocol write-up, including the verification record, is in
 [`docs/protocol.md`](https://github.com/kiwimato/hpz-ecfan/blob/master/docs/protocol.md).

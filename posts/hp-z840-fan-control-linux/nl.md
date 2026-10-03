@@ -1,6 +1,6 @@
 ---
 title: De chassisventilatoren van een HP Z840 aansturen vanuit Linux
-description: De ventilatorcontroller van de Z840 hangt aan de private SMBus van de embedded controller, waar lm-sensors niet bij kan. hpz-ecfan bereikt hem via de mailbox van de EC zelf.
+description: De ventilatorcontroller van de Z840 zit op de private SMBus van de embedded controller, buiten bereik van lm-sensors. hpz-ecfan praat ermee via de EC-mailbox.
 date: 2026-09-30
 tags: opensource, homelab
 ---
@@ -10,38 +10,35 @@ tags: opensource, homelab
   Engelse versie voor de TODO's; houd beide talen gelijk als je iets toevoegt.
 -->
 
-Sommige problemen bestaan alleen omdat een fabrikant besloot dat jij ze niet hoefde op te
-lossen. De HP Z840 is er zo een: een prima werkstation waarvan de chassisventilatoren
-draaien op het profiel dat de BIOS bij het opstarten koos, zonder enige manier om daar
-vanuit het besturingssysteem iets anders van te vinden.
+De HP Z840 is een prima werkstation, maar de chassisventilatoren draaien op het profiel
+dat de BIOS bij het opstarten koos. Vanuit het besturingssysteem kun je daar niets aan
+veranderen; HP ging er blijkbaar van uit dat niemand dat zou willen.
 
-Dus heb ik die manier geschreven. [`hpz-ecfan`](https://github.com/kiwimato/hpz-ecfan) is
-een kleine Python-tool die de ventilatorcurve van Z-serie werkstations verzet vanuit
-Linux — zonder kernelmodule, zonder herstart, zonder firmwarepatch.
+Dus heb ik het zelf gebouwd. [`hpz-ecfan`](https://github.com/kiwimato/hpz-ecfan) is een
+kleine Python-tool die vanuit Linux de ventilatorcurve van Z-serie werkstations verzet.
+Je hebt er geen kernelmodule, herstart of firmwarepatch voor nodig.
 
 ## Waarom de normale gereedschappen niets zien
 
-De voor de hand liggende aanpak strandt meteen. `lm-sensors` vindt geen
-ventilatorcontroller. `fancontrol` heeft niets om aan te sturen. De `adt7475`-kernel­driver,
-precies de juiste driver, koppelt nooit aan.
+`lm-sensors` vindt geen ventilatorcontroller, dus `fancontrol` heeft niets om aan te
+sturen. De `adt7475`-kerneldriver, de juiste driver voor deze chip, bindt nooit.
 
-Dat ligt aan de topologie. De chip die de chassisventilatoren aanstuurt is een ON
-Semiconductor **NCT7491** — een onderdeel uit de ADT7475-familie, uitgebreid beschreven in
-een openbare datasheet. Maar hij hangt niet aan de SMBus die de PCH beheert. Hij hangt aan
-de *private* bus van de Nuvoton embedded controller, en `i2c-i801` heeft daar geen route
-naartoe. De chip zit er gewoon, volledig standaard, en volstrekt onbereikbaar.
+De chip achter de chassisventilatoren is een ON Semiconductor **NCT7491**, een onderdeel
+uit de ADT7475-familie met een uitgebreide openbare datasheet. Alleen hangt hij niet aan
+de SMBus van de PCH, maar aan de *private* bus van de Nuvoton embedded controller, en
+`i2c-i801` kan daar niet bij. Een doodgewone chip dus, waar Linux toch niet aan kan komen.
 
-HP's eigen ACPI en WMI laten een deel van het beeld zien — de `hp-wmi-sensors`-driver leest
-moeiteloos temperaturen en toerentallen. De leeskant is openbaar. De schrijfkant niet.
+Via HP's eigen ACPI en WMI kom je een eind: de `hp-wmi-sensors`-driver leest zonder
+problemen temperaturen en toerentallen uit. Lezen is dus openbaar, schrijven niet.
 
 ## De mailbox
 
-De schrijfkant bleek te achterhalen uit HP's `HhmDxe`-firmwaremodule, die de chip bij elke
-POST programmeert. Die moet de NCT7491 op de een of andere manier bereiken, en het
-mechanisme dat hij gebruikt is een kleine SMBus-proxy in het RAM-venster van de EC.
+Hoe je schrijft, viel te achterhalen uit HP's `HhmDxe`-firmwaremodule, die de chip bij
+elke POST programmeert. Die module moet de NCT7491 ook ergens bereiken, en dat doet hij
+via een kleine SMBus-proxy in het RAM-venster van de EC.
 
-Dat venster zit op de I/O-poorten `0x800`–`0x8FE`, met paginaselectie via `0x8FF`. Pagina 0
-bevat de proxy:
+Dat venster zit op de I/O-poorten `0x800` tot en met `0x8FE`, met paginaselectie via
+`0x8FF`. In pagina 0 zit de proxy:
 
 | byte | betekenis |
 |------|-----------|
@@ -54,39 +51,37 @@ bevat de proxy:
 
 Lezen is `E5=dev, E8=reg, E7=1, E6=1, F0=1`, daarna pollen tot bit 0 van `F0` laag wordt en
 het resultaat uit `E8` halen. Schrijven is `E5=dev, E8=val, E9=reg, E7=2, E6=0, F0=1` met
-dezelfde poll. Dat is het hele protocol.
+dezelfde poll. Meer zit er niet in het protocol.
 
 ## Twee dingen die het protocol je niet geeft
 
-**Er is geen foutvlag.** Een NACK op de bus eindigt precies als een succes: bit 0 van `F0`
-wordt gewist en `E8` blijft staan op wat er al stond. Een mislukte lezing levert verouderde
-data op die er volkomen geloofwaardig uitziet. De enige verdediging is elke schrijfactie
-terugleggen en vergelijken — en dat doet de tool, zonder uitzondering.
+Ten eerste is er geen foutvlag. Een NACK op de bus eindigt precies zoals een succes: bit 0
+van `F0` wordt gewist en in `E8` blijft staan wat er al stond. Een mislukte read geeft dus
+oude data terug die er heel geloofwaardig uitziet. Je kunt je alleen indekken door elke
+write terug te lezen en te vergelijken, en dat doet de tool bij elke write.
 
-**Er is geen arbitrage.** De mailbox is een handvol gedeelde bytes. Twee processen die
-tegelijk door de reeks lopen, verweven hun schrijfacties en verminken elkaars databyte, en
-door de ontbrekende foutvlag merkt geen van beide het. Elke transactie gaat daarom door een
-`flock` op `/var/lock/ecmbox` (te overschrijven met `--lock` of `HPZ_EC_LOCK`). Dat is niet
-optioneel.
+Ten tweede is er geen arbitrage. De mailbox is een handvol gedeelde bytes. Lopen twee
+processen tegelijk door de reeks, dan lopen hun writes door elkaar en overschrijven ze
+elkaars databyte, en omdat er geen foutvlag is merkt geen van beide dat. Elke transactie
+neemt daarom een `flock` op `/var/lock/ecmbox` (het pad pas je aan met `--lock` of
+`HPZ_EC_LOCK`). Die lock zelf is niet optioneel.
 
-## Falen richting koud
+## Veilig falen
 
-Het verleidelijke ontwerp is om de chip uit zijn automatische modus te halen en de
-PWM-duty rechtstreeks aan te sturen. Dat is eenvoudiger te doorgronden en geeft nauwkeurige
-controle. Het is ook de verkeerde keuze, want het maakt van een crashende daemon een
-thermisch incident.
+Je zou de chip uit zijn automatische modus kunnen halen en de PWM-duty zelf rechtstreeks
+aansturen. Dat is makkelijker te overzien en je hebt precieze controle, maar dan wordt een
+crashende daemon een thermisch incident.
 
-In plaats daarvan blijft de tool binnen de automatische regelkring van de chip en verzet
-alleen de vorm van de curve: de bodem (`PWMmin`) of de knik (`Tmin`). De NCT7491 blijft
-gewoon zelf temperatuurgestuurd regelen zoals de BIOS hem heeft ingesteld — hij rekent
-alleen met andere getallen. Gaat de tool onderuit, wordt hij afgeschoten, of raakt de
-machine het proces volledig kwijt, dan blijven de ventilatoren regelen. De THERM-limieten
-blijven de hele tijd scherp staan.
+De tool blijft daarom binnen de automatische regelkring van de chip en verzet alleen de
+vorm van de curve: de bodem (`PWMmin`) of de knik (`Tmin`). De NCT7491 regelt gewoon zelf
+op temperatuur, zoals de BIOS hem heeft ingesteld, alleen met andere getallen. Crasht de
+tool, wordt hij gekilld of raakt de machine het proces helemaal kwijt, dan blijven de
+ventilatoren gewoon regelen. De THERM-limieten blijven al die tijd actief.
 
-De rest volgt dezelfde regel. De tool weigert te schrijven als de LOCK-bit van de chip
-gezet is. Hij weigert überhaupt te draaien op een machine waarvan de DMI-productnaam geen
-HP Z is, tenzij je `--force` meegeeft. Bij elke faalrichting die hij kan kiezen, kiest hij
-de richting die op méér luchtstroom uitkomt in plaats van minder.
+Voor de rest geldt dezelfde regel. De tool schrijft niets als de LOCK-bit van de chip
+gezet is, en draait helemaal niet op een machine waarvan de DMI-productnaam geen HP Z is,
+tenzij je `--force` meegeeft. Overal waar hij kan kiezen hoe hij faalt, kiest hij de kant
+met meer luchtstroom.
 
 ## Gebruik
 
@@ -110,20 +105,19 @@ python3 -m hpz_ecfan.cli log --interval 30
 
 Op de Z840 zijn tach1 en tach2 de achterste ventilatoren op PWM1 en PWM2; tach3 en tach4
 zijn het voorste paar, allebei aangestuurd door PWM3. De tool heeft `/dev/port` nodig, dus
-root of `CAP_SYS_RAWIO` — wat ook betekent dat hij prima draait vanuit een privileged
-container.
+root of `CAP_SYS_RAWIO`. Daardoor draait hij ook prima in een privileged container.
 
-Niets overleeft een stroomonderbreking: die zet zowel de EC als de chip terug op de
-BIOS-standaarden. Een warme herstart doorloopt POST opnieuw, en die herschrijft de chip
-sowieso. Wat je instelt is een wijziging tijdens de rit, wat een andere manier is om te
-zeggen dat de machine nooit verder dan één herstart van zijn fabrieksgedrag af staat.
+Niets overleeft een stroomonderbreking, want die zet zowel de EC als de chip terug op de
+BIOS-standaarden. Een warme herstart doorloopt POST opnieuw en herschrijft de chip toch al.
+Alles wat je instelt is een runtime-wijziging, dus de machine is altijd maar één herstart
+verwijderd van zijn fabrieksgedrag.
 
 ## Status
 
-Live getest op een Z840 met BIOS M60 v02.56. Andere Z-serie borden delen vrijwel zeker
-dezelfde EC en dezelfde mailbox, maar hebben hun ventilatoren mogelijk op andere
-PWM-uitgangen zitten — draai `dump` en `status` en lees wat eruit komt voordat je iets
-schrijft. Meldingen van andere borden zijn welkom.
+Ik heb het live getest op een Z840 met BIOS M60 v02.56. Andere Z-serie borden hebben
+vrijwel zeker dezelfde EC en dezelfde mailbox, maar hun ventilatoren kunnen op andere
+PWM-uitgangen zitten. Draai dus eerst `dump` en `status` en kijk wat eruit komt voordat je
+iets schrijft. Meldingen van andere borden zijn welkom.
 
 De volledige protocolbeschrijving, inclusief het verificatieverslag, staat in
 [`docs/protocol.md`](https://github.com/kiwimato/hpz-ecfan/blob/master/docs/protocol.md).

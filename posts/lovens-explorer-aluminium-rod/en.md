@@ -1,6 +1,6 @@
 ---
 title: Fixing a snapped aluminium tube on a Lovens Explorer with a piece of copper pipe
-description: One of the aluminium tubes on our Lovens Explorer bakfiets snapped clean through. A short length of 12 mm copper pipe left over from a plumbing job turned out to be the perfect sleeve — no new part, no waiting.
+description: One of the aluminium tubes on our Lovens Explorer bakfiets snapped. Some 12 mm copper pipe left over from a plumbing job made a snug sleeve.
 date: 2026-09-23
 tags: repair, bakfiets
 image: copper-sleeve-close.jpg
@@ -25,29 +25,29 @@ They are light, they flex, and they join with the same push-fit ferrules you kno
 a camping tent. One of ours snapped clean through, just above the bend at the bottom.
 <!-- CONFIRM: location of the break, and how you noticed -->
 
-A thin-walled aluminium tube that has failed like this is not something you can glue.
-The two ends no longer sit straight against each other, and every gust of wind works on
-the joint. Either the part gets replaced, or the break gets a splint.
+You cannot glue a thin-walled aluminium tube that has broken like this. The two ends no
+longer sit straight against each other, and every gust of wind works on the joint. So
+it was either a new part or a splint over the break.
 
 ## Why not just order the part?
 
-Honestly: I did not want to wait. A replacement means finding the right dealer, a lead
-time, and a price for what is essentially a metre of tube — and in the meantime the tent
-is down and it is raining. <!-- CONFIRM: did you ask Lovens or the dealer? price? -->
+I did not want to wait. A replacement means finding the right dealer, waiting out the
+lead time and paying for what is essentially a metre of tube, and meanwhile the tent is
+down and it is raining. <!-- CONFIRM: did you ask Lovens or the dealer? price? -->
 
 ## The sleeve
 
-An internal break gets an external splint. That is the oldest fix there is, and it works
-because the sleeve takes over the bending load; the aluminium inside only has to stay put.
+A broken tube gets a splint on the outside, which is about the oldest fix there is. The
+sleeve takes over the bending load, so the aluminium inside only has to stay put.
 
 I had a leftover piece of **12 mm copper pipe** from a plumbing job. <!-- CONFIRM 12 mm -->
-Standard 12 mm copper has a 1 mm wall, so the inside is 10 mm — and the aluminium tube is
-about 10 mm. It slides over with almost no play, which is exactly what you want: snug
-enough not to rattle, loose enough to get on without a hammer.
+Standard 12 mm copper has a 1 mm wall, which leaves 10 mm inside, and the aluminium tube
+is about 10 mm. It slides over with almost no play: snug enough not to rattle, loose
+enough to get on without a hammer.
 
 1. Cut a piece of copper pipe about 20 cm long. <!-- CONFIRM length --> A pipe cutter gives
-   a clean end; a hacksaw is fine too. Either way, deburr the inside edge with a round
-   file or the back of a knife, otherwise it scores the aluminium as it slides on.
+   a clean end, but a hacksaw will do. Deburr the inside edge with a round file or the
+   back of a knife, or it will score the aluminium as it slides on.
 2. Clean up the two broken ends of the aluminium tube and take the burrs off, so they
    slide into the copper instead of catching.
 3. Slide the sleeve over one half, then feed the other half in from the other side until
@@ -63,28 +63,28 @@ enough not to rattle, loose enough to get on without a hammer.
 
 ## A word on copper against aluminium
 
-Worth knowing before you copy this: copper and aluminium touching each other in the wet
-form a galvanic couple, and it is the aluminium that corrodes. For a tent bow that lives
-under a fabric cover and dries out between showers, I am not worried about it. If this
-were a part that sits wet all year — a frame member, anything near the wheels — I would
-use a stainless or aluminium sleeve instead, or at least put a layer of tape between the
-two metals.
+If you copy this, know that copper and aluminium touching each other in the wet form a
+galvanic couple, and the aluminium is the one that corrodes. On a tent bow that lives
+under a fabric cover and dries out between showers, that does not worry me. On a part
+that sits wet all year, such as a frame member or anything near the wheels, I would use
+a stainless or aluminium sleeve instead, or at least put a layer of tape between the two
+metals.
 
-And to be clear: this is a splint for a tent pole. I would not do this to anything that
-steers, brakes, or carries the children.
+This is a splint for a tent pole. I would not do it to anything that steers, brakes or
+carries the children.
 
 ## Does it hold?
 
 So far, yes. <!-- CONFIRM: how long since, any movement or noise -->
 The joint is stiffer than the original tube, so that bow flexes slightly less than the
-one on the other side — not something you notice once the fabric is on. Cost: nothing,
-it was all in the house already. Time: well under half an hour, most of it filing.
+one on the other side. Once the fabric is on you do not notice. It cost nothing, since
+everything was already in the house, and took well under half an hour, most of it filing.
 
 ## Parts and tools
 
 | Item | Note |
 | --- | --- |
-| Copper pipe, 12 mm, ~20 cm | leftover from a plumbing job — any DIY shop sells it by the metre |
+| Copper pipe, 12 mm, ~20 cm | leftover from a plumbing job; any DIY shop sells it by the metre |
 | Electrical tape | a few turns |
 | Pipe cutter or hacksaw | |
 | Small round file | for deburring both metals |

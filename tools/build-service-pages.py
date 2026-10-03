@@ -28,253 +28,257 @@ NAV = [('/#services', 'Services'), ('/#approach', 'Approach'), ('/#work', 'Engag
 PAGES = [
     dict(
         slug='aws-cloud-consultant',
-        title='Freelance AWS Consultant — Architecture & Migration',
+        title='Freelance AWS consultant: architecture and migration',
         desc='Freelance AWS consultant in Utrecht. Multi-account architecture, ECS and RDS workloads, and staged migration off legacy infrastructure. Remote or on-site.',
         h1='Freelance AWS consultant',
         service_name='AWS cloud architecture and migration',
-        lede=('Most of the last decade of my work has been on AWS — for an online bank, an '
-              'international leasing company and a manufacturing marketplace. What follows is '
-              'the work I actually get called in for.'),
+        lede=('Most of my work over the last decade has been on AWS, for an online bank, an '
+              'international leasing company and a manufacturing marketplace. These are the jobs '
+              'I usually get called in for.'),
         takes_on=[
             ('Account and network layout', 'Multi-account structure, VPC and subnet design, '
-             'segmentation, and the boring guardrails that stop an estate sprawling — so the '
-             'thing is still comprehensible in two years.'),
+             'segmentation, and the dull guardrails that stop an estate sprawling, so it still '
+             'makes sense in two years.'),
             ('Workloads', 'ECS and EC2, RDS, S3, DynamoDB, API Gateway, CloudFront. Sizing, '
-             'placement, autoscaling and the failure modes each one actually has.'),
-            ('Migration off legacy', 'Moving estates from on-prem, from a single monolithic '
-             'environment, or from a hosted provider onto AWS — in stages, with production '
+             'placement, autoscaling, and the ways each of them actually fails.'),
+            ('Migration off legacy', 'Moving estates onto AWS from on-prem, from a single '
+             'monolithic environment or from a hosted provider. In stages, with production '
              'running the whole time.'),
-            ('Cost and availability', 'Finding where money is being burned on idle capacity, '
-             'and where a single point of failure is quietly waiting for a bad Tuesday.'),
+            ('Cost and availability', 'Finding the money going on idle capacity, and the single '
+             'point of failure that is waiting for a bad Tuesday.'),
         ],
         how=[('Read the estate first',
               'Before anything moves, I map what is really running, what depends on what, and '
               'which parts nobody dares touch. Migration plans built from the architecture '
-              'diagram rather than from reality are how weekends get ruined.'),
+              'diagram instead of from what is actually running are how weekends get ruined.'),
              ('Codify, then cut over',
-              'The target gets built in Terraform before traffic goes anywhere near it. That '
-              'makes the cutover reversible, and it means you are left with infrastructure your '
-              'team can rebuild rather than a hand-made environment nobody understands.'),
+              'The target gets built in Terraform before any traffic goes near it. That makes '
+              'the cutover reversible, and your team ends up with infrastructure it can rebuild '
+              'instead of a hand-made environment nobody understands.'),
              ('One environment at a time',
               'Staged migrations with a real rollback path. I have never needed a big-bang '
               'weekend cutover and would push back hard on one.')],
         proof=[('3D Hubs', 'Redesigned a monolithic infrastructure into isolated, reproducible '
-                'environments on AWS with Terraform, so scaling and testing stopped fighting '
-                'each other.'),
+                'environments on AWS with Terraform, so scaling and testing stopped getting in '
+                'each other\'s way.'),
                ('LeasePlan', 'Ran SAP OpenText hosting on AWS where high availability was the '
-                'hard requirement, and automated the instance configuration that had been manual.'),
-               ('Knab', 'AWS work inside a regulated Dutch bank — ECS, RDS, CloudFront, API '
-                'Gateway and DynamoDB, under the evidence requirements that come with financial '
+                'hard requirement, and automated the instance configuration that had been done '
+                'by hand.'),
+               ('Knab', 'AWS work inside a regulated Dutch bank: ECS, RDS, CloudFront, API '
+                'Gateway and DynamoDB, with the evidence requirements that come with financial '
                 'services.')],
-        fit=['You are on AWS already but it grew by hand and nobody can reproduce it.',
+        fit=['You are on AWS already, but it was built by hand and nobody can reproduce it.',
              'You are planning a migration and want someone who has done staged cutovers before.',
-             'Your bill or your availability is telling you the architecture needs a rethink.',
+             'Your bill or your availability says the architecture needs a rethink.',
              'You need AWS depth for a fixed period without hiring a permanent engineer.'],
         related=['terraform-consultant', 'cloud-security-hardening', 'observability-monitoring'],
     ),
     dict(
         slug='terraform-consultant',
-        title='Freelance Terraform Consultant — Infrastructure as Code',
+        title='Freelance Terraform consultant: infrastructure as code',
         desc='Freelance Terraform consultant in Utrecht. Module design, importing click-ops estates into state, and Ansible or Puppet underneath. Remote or on-site.',
         h1='Freelance Terraform consultant',
         service_name='Infrastructure as Code with Terraform',
-        lede=('Terraform is the tool I reach for first, and has been across every engagement '
-              'since 2018. The interesting problem is almost never the syntax — it is what to '
-              'do with an estate that was built by hand and now has to become code.'),
+        lede=('Terraform is the tool I reach for first, and has been on every engagement since '
+              '2018. The hard part is rarely the syntax. It is usually an estate that was built '
+              'by hand and now has to become code.'),
         takes_on=[
             ('Bringing click-ops under control', 'Importing an existing, hand-built estate into '
-             'state without a rebuild. This is the messy one, and the one most teams stall on.'),
+             'state without a rebuild. It is messy work, and it is where most teams stall.'),
             ('Module design', 'A module library your team can actually use: sensible interfaces, '
-             'versioned, documented, and not so abstract that reading it is harder than reading '
-             'the resources.'),
+             'versioned and documented, and never so abstract that it is harder to read than '
+             'the resources themselves.'),
             ('State strategy', 'Backends, workspace and environment layout, locking, and blast '
-             'radius — so a mistake in staging cannot reach into production.'),
+             'radius, so a mistake in staging cannot reach production.'),
             ('The layer underneath', 'Ansible or Puppet for configuration management where '
-             'Terraform stops. Both have been production tools for me, not weekend reading.'),
+             'Terraform stops. I have run both in production.'),
         ],
         how=[('Small, reviewable changes',
               'Infrastructure changes should go through review like any other code, and a plan '
-              'should be readable by someone who did not write it. If a plan output needs '
+              'should be readable by someone who did not write it. If the plan output needs '
               'explaining every time, the code is wrong.'),
              ('Import before rewrite',
               'Rebuilding an estate from scratch to "do it properly" is how migrations die. '
               'Import what exists, get it green, then improve it under version control.'),
-             ('Leave a library, not a black box',
+             ('Hand over something your team can extend',
               'The deliverable is modules and documentation your engineers own. If your team '
               'cannot extend it after I leave, it was not finished.')],
-        proof=[('Knab', 'Migrated legacy infrastructure to an IaC model with Terraform and '
-                'PowerShell, making environments consistent and reproducible across a regulated '
-                'estate.'),
+        proof=[('Knab', 'Migrated legacy infrastructure to IaC with Terraform and PowerShell, '
+                'which made environments across a regulated estate consistent and '
+                'reproducible.'),
                ('LeasePlan', 'Replaced manual OpenText instance setup with Terraform and Ansible '
-                'Tower, removing a large slice of repetitive configuration work.'),
-               ('Patchman', 'Orchestrated an entire Linode VM estate with Puppet, keeping every '
-                'node consistent — the same discipline, a different tool.')],
+                'Tower, which removed a large share of the repetitive configuration work.'),
+               ('Patchman', 'Orchestrated an entire Linode VM estate with Puppet and kept every '
+                'node consistent.')],
         fit=['Your infrastructure exists only in the console and in one person\'s memory.',
-             'You have Terraform but it has become a tangle nobody wants to run plan against.',
-             'Environments drift, and nobody is quite sure how staging differs from production.',
+             'You have Terraform, but it has become a tangle nobody wants to run plan against.',
+             'Environments drift, and nobody is sure how staging differs from production.',
              'You want IaC set up properly once, by someone who has untangled it before.'],
         related=['aws-cloud-consultant', 'cicd-devops-engineer', 'cloud-security-hardening'],
     ),
     dict(
         slug='cicd-devops-engineer',
-        title='Freelance CI/CD Engineer — Pipelines That Ship Safely',
+        title='Freelance CI/CD engineer: pipelines that ship safely',
         desc='Freelance CI/CD and developer experience engineer, Utrecht. Azure DevOps, GitHub Actions and Jenkins pipelines, plus release and dependency automation.',
         h1='Freelance CI/CD and developer experience engineer',
         service_name='CI/CD and developer experience',
         lede=('I spent a stretch on a bank\'s Developer Experience team, which is a good way to '
-              'learn that most pipeline problems are really organisational problems wearing a '
-              'YAML costume.'),
+              'learn that most pipeline problems are organisational problems in a YAML '
+              'costume.'),
         takes_on=[
-            ('Pipeline design and repair', 'Azure DevOps, GitHub Actions and Jenkins. Builds that '
-             'are fast enough that people stop working around them, and releases that are dull '
-             'enough to do on a Friday.'),
-            ('Release and change automation', 'Automated releases with change tickets generated '
-             'as a side effect, so change management stops being a manual tax on every deploy.'),
+            ('Pipeline design and repair', 'Azure DevOps, GitHub Actions and Jenkins. Builds fast '
+             'enough that people stop working around them, and releases dull enough to do on a '
+             'Friday.'),
+            ('Release and change automation', 'Automated releases that generate their own change '
+             'tickets, so change management stops being a manual tax on every deploy.'),
             ('Dependency and compliance toil', 'RenovateBot for dependency updates and OpsLevel '
-             'for service ownership and compliance reporting — the work that otherwise turns into '
-             'a nagging Slack channel.'),
-            ('Self-hosted runners', 'When hosted CI gets expensive or too restrictive, moving to '
-             'self-hosted runners under configuration management, with the cost and control that '
-             'brings back.'),
+             'for service ownership and compliance reporting. Left manual, this is the work that '
+             'turns into a nagging Slack channel.'),
+            ('Self-hosted runners', 'When hosted CI gets too expensive or too restrictive, I move '
+             'it to self-hosted runners under configuration management, which gets you the cost '
+             'and the control back.'),
         ],
         how=[('Measure the thing people complain about',
               'Usually the complaint is "CI is slow", and usually the real cost is somewhere '
               'nobody has timed. Find it before rewriting anything.'),
-             ('Automate the boring gate, not the judgement',
+             ('Automate the checks, keep the judgement',
               'Scanning, dependency bumps, ticket creation and compliance evidence should be '
               'automatic. Whether to ship on a given day should stay a human decision.'),
              ('Reduce the number of things to remember',
-              'The measure of developer experience is how much a developer has to hold in their '
-              'head to release safely. Lower is better, and it is a real deliverable.')],
-        proof=[('Knab — Developer Experience', 'Automated compliance reporting and dependency '
-                'updates with OpsLevel and RenovateBot, cutting technical debt and the cognitive '
-                'load carried by product teams.'),
-               ('Knab — pipelines', 'Owned and optimised the Azure DevOps pipeline estate, and '
+              'I measure developer experience by how much a developer has to hold in their head '
+              'to release safely. Lower is better, and getting it lower is a deliverable in its '
+              'own right.')],
+        proof=[('Knab, Developer Experience', 'Automated compliance reporting and dependency '
+                'updates with OpsLevel and RenovateBot, which cut technical debt and the '
+                'cognitive load on product teams.'),
+               ('Knab, pipelines', 'Owned and optimised the Azure DevOps pipeline estate, and '
                 'designed an automated release mechanism with auto-generated change tickets for a '
                 'regulated environment.'),
                ('3D Hubs', 'Moved CI/CD off a hosted service onto self-hosted Jenkins managed by '
-                'Puppet, lowering build costs, and wrote a custom GitHub Action bot in TypeScript '
-                'that automated the deployment workflow end to end.')],
-        fit=['Releases are a ceremony, and everyone dreads them.',
-             'Your build times have quietly doubled and nobody owns the pipeline.',
+                'Puppet, which lowered build costs, and wrote a custom GitHub Action bot in '
+                'TypeScript that automated the deployment workflow end to end.')],
+        fit=['Releases are a ceremony that everyone dreads.',
+             'Your build times have doubled and nobody owns the pipeline.',
              'Dependency updates and compliance evidence are done by hand, or not at all.',
              'You want a platform or DevEx function set up without hiring a whole team for it.'],
         related=['terraform-consultant', 'cloud-security-hardening', 'observability-monitoring'],
     ),
     dict(
         slug='cloud-security-hardening',
-        title='Cloud Security & Compliance Hardening — AWS, Containers',
+        title='Cloud security and compliance hardening: AWS, containers',
         desc='Freelance cloud security engineer, Utrecht. AWS WAF, CloudFront and Shield, distroless containers, and Trivy and OWASP ZAP scanning in the pipeline.',
         h1='Cloud security and compliance hardening',
         service_name='Cloud security and compliance hardening',
-        lede=('Security has been the lens I look at infrastructure through since building a '
-              'Slackware-based security distribution with friends in the early 2000s. It is not '
-              'a phase at the end of a project.'),
+        lede=('I have looked at infrastructure with security in mind since building a '
+              'Slackware-based security distribution with friends in the early 2000s, so I build '
+              'it in from the start of a project instead of leaving it for the end.'),
         takes_on=[
             ('The edge', 'AWS WAF, CloudFront and Shield in front of public-facing load '
-             'balancers — closing off the part of the estate the internet can actually reach.'),
+             'balancers, which closes off the part of the estate the internet can actually '
+             'reach.'),
             ('Containers', 'Migrating production workloads to distroless images, so a compromised '
              'container has no shell, no package manager and very little to work with.'),
             ('Shift-left scanning', 'SonarCloud, Trivy and OWASP ZAP wired into the build, so '
-             'findings arrive while the code is still fresh rather than in a quarterly report.'),
+             'findings arrive while the code is still fresh instead of in a quarterly report.'),
             ('Evidence for auditors', 'Automated compliance reporting and ownership data, so an '
              'audit becomes a document you generate instead of a project you staff.'),
             ('Network security', 'Segmentation, VPN estates on pfSense, WireGuard or OpenVPN, and '
-             'the Cisco background to go with it — CCNA and Cisco Security Green Belt.'),
+             'the Cisco background to go with it (CCNA and Cisco Security Green Belt).'),
         ],
         how=[('Fix the reachable surface first',
-              'Effort goes where an attacker can actually get. The public edge and the container '
-              'runtime before the theoretical risks further down the list.'),
+              'Effort goes where an attacker can actually get in. The public edge and the '
+              'container runtime come before the theoretical risks further down the list.'),
              ('Make the secure path the easy path',
               'Controls developers have to remember get skipped under deadline. Controls built '
               'into the pipeline and the base image do not.'),
              ('Produce evidence as a by-product',
-              'In regulated environments the control is only half the work — proving it ran is '
-              'the other half. Both should be automatic.')],
-        proof=[('Knab', 'Moved 34 production services to distroless images, cutting reported '
-                'vulnerabilities from thousands to under 20, and put AWS WAF, CloudFront and '
-                'Shield in front of the 3 customer identity endpoints — inside a Dutch bank.'),
-               ('Knab — pipelines', 'Integrated SonarCloud, Trivy and OWASP ZAP scanning into '
+              'In regulated environments, running the control is half the work and proving it '
+              'ran is the other half. Both should be automatic.')],
+        proof=[('Knab', 'Inside a Dutch bank, moved 34 production services to distroless images, '
+                'cutting reported vulnerabilities from thousands to under 20, and put AWS WAF, '
+                'CloudFront and Shield in front of the 3 customer identity endpoints.'),
+               ('Knab, pipelines', 'Integrated SonarCloud, Trivy and OWASP ZAP scanning into '
                 'Azure DevOps builds to shift security left, and automated the change-management '
                 'trail around releases.'),
                ('Cisco, via 3Pillar Global', 'Python automation for Cisco FirePower next-generation '
-                'firewalls — security tooling from the inside.')],
-        fit=['You are regulated, and an audit is coming.',
-             'Your public endpoints have no WAF in front of them and you know it.',
-             'Container images are inherited, enormous, and full of things you do not ship.',
+                'firewalls, working on the security tooling itself.')],
+        fit=['You are regulated and an audit is coming.',
+             'Your public endpoints have no WAF in front of them, and you know it.',
+             'Your container images are inherited, enormous and full of things you do not ship.',
              'Security findings arrive as a PDF once a quarter instead of in the pipeline.'],
         related=['aws-cloud-consultant', 'cicd-devops-engineer', 'network-engineering'],
     ),
     dict(
         slug='observability-monitoring',
-        title='Observability Consultant — Datadog, New Relic, Grafana',
-        desc='Freelance observability consultant, Utrecht. Datadog, New Relic, Prometheus, Grafana and Splunk — alerting that reflects real failure, not noise.',
+        title='Observability consultant: Datadog, New Relic, Grafana',
+        desc='Freelance observability consultant, Utrecht. Datadog, New Relic, Prometheus, Grafana and Splunk, with alerts that fire on real failures instead of noise.',
         h1='Observability that earns its keep',
         service_name='Observability and monitoring',
-        lede=('Every team I have joined had monitoring. Fewer had alerting anyone trusted. The '
-              'gap between those two things is where incidents live.'),
+        lede=('Every team I have joined had monitoring. Fewer had alerting anyone trusted, and '
+              'incidents tend to happen in that gap.'),
         takes_on=[
             ('Instrumentation', 'Datadog, New Relic, Prometheus and Grafana, plus Splunk and ELK '
-             'on the logging side. Getting the signals out of the system in the first place.'),
-            ('Custom checks', 'The checks that matter are usually specific to your application, '
-             'not the ones that ship in the box. Writing those is most of the value.'),
+             'for logs. Getting the signals out of the system in the first place.'),
+            ('Custom checks', 'The checks that matter are usually the ones specific to your '
+             'application, and writing those is most of the value.'),
             ('Alert hygiene', 'Cutting the alerts nobody acts on. An on-call rotation that has '
-             'learned to ignore its pager is worse than no pager.'),
+             'learned to ignore its pager is worse off than one with no pager.'),
             ('Dashboards people actually open', 'Fewer panels, chosen to answer the questions '
-             'asked at three in the morning.'),
+             'people ask at three in the morning.'),
         ],
         how=[('Start from the incidents you have had',
               'Your last six incidents tell you what to instrument far better than a vendor '
               'checklist does.'),
              ('Alert on symptoms, not causes',
-              'Page when users are affected or about to be. Everything else is a dashboard or a '
-              'ticket, not a phone call at 03:00.'),
+              'Page when users are affected or about to be. Everything else goes on a dashboard '
+              'or into a ticket, and nobody gets a phone call at 03:00 for it.'),
              ('Every alert needs an action',
-              'If there is nothing to do about it, it is not an alert. That one rule removes most '
-              'of the noise in a typical estate.')],
-        proof=[('LeasePlan', 'Designed a Datadog alerting layer with custom checks that surfaced '
-                'performance bottlenecks proactively, on infrastructure where availability was '
+              'If there is nothing to do about it, it should not be an alert. That one rule '
+              'removes most of the noise in a typical estate.')],
+        proof=[('LeasePlan', 'Designed a Datadog alerting layer with custom checks that caught '
+                'performance bottlenecks early, on infrastructure where availability was '
                 'contractual.'),
                ('3D Hubs', 'Prometheus and the ELK stack across rebuilt AWS environments.'),
                ('Knab', 'New Relic across a regulated banking platform, and Splunk in the earlier '
                 'engagement.')],
         fit=['You find out about outages from customers.',
-             'Your on-call rotation has quietly stopped reading the alerts.',
+             'Your on-call rotation stopped reading the alerts a while ago.',
              'You are paying for an observability platform and using ten percent of it.',
              'Something is slow, intermittently, and nobody can prove where.'],
         related=['aws-cloud-consultant', 'cicd-devops-engineer', 'cloud-security-hardening'],
     ),
     dict(
         slug='network-engineering',
-        title='Network Engineering — Hybrid Cloud, VPN & Segmentation',
+        title='Network engineering: hybrid cloud, VPN and segmentation',
         desc='Freelance network engineer, Utrecht. Hybrid cloud connectivity, segmentation, and VPN estates on pfSense, WireGuard and OpenVPN. CCNA certified.',
         h1='Network engineering and connectivity',
         service_name='Network engineering and connectivity',
-        lede=('Before cloud I did telecom — 4G and LTE rollout, MPLS, and Alcatel-Lucent 7750 SR '
-              'service routers. That background is why cloud networking problems tend not to '
+        lede=('Before cloud I worked in telecom: 4G and LTE rollout, MPLS, and Alcatel-Lucent '
+              '7750 SR service routers. Because of that, cloud networking problems rarely '
               'surprise me.'),
         takes_on=[
-            ('Hybrid connectivity', 'Joining an office, a data centre and a cloud estate together '
-             'without creating one flat network where everything can reach everything.'),
-            ('Segmentation', 'VPC and subnet design, security groups and routing that reflect an '
-             'actual trust model rather than whatever was quickest at the time.'),
-            ('VPN estates', 'pfSense, WireGuard and OpenVPN — site-to-site and remote access, '
-             'built to be operated rather than admired.'),
+            ('Hybrid connectivity', 'Joining an office, a data centre and a cloud estate without '
+             'ending up with one flat network where everything can reach everything.'),
+            ('Segmentation', 'VPC and subnet design, security groups and routing that follow an '
+             'actual trust model instead of whatever was quickest at the time.'),
+            ('VPN estates', 'pfSense, WireGuard and OpenVPN, site-to-site and remote access, '
+             'built so the people running them can operate them day to day.'),
             ('Load balancing and failover', 'HAProxy and Keepalived for services that cannot '
              'afford a single point of failure.'),
         ],
         how=[('Draw the real topology',
-              'Almost every network engagement starts by discovering the diagram is out of date. '
-              'That discovery is usually the most valuable week.'),
+              'Almost every network engagement starts with finding out the diagram is out of '
+              'date. That week of discovery is usually the most useful one.'),
              ('Default deny, then open deliberately',
-              'Segmentation is only worth anything if the default is closed. Retrofitting that is '
-              'work, but it is finite work.'),
+              'Segmentation is only worth anything if the default is closed. Retrofitting that '
+              'takes work, but the work has an end.'),
              ('Document it for the person on call',
-              'A network nobody but you can reason about is a liability, however elegant it is.')],
+              'If nobody but you can reason about a network, it is a liability, however elegant '
+              'it is.')],
         proof=[('Patchman', 'Scaled Redis, PostgreSQL and Nginx for high availability using '
                 'Keepalived and HAProxy across a Linode estate.'),
-               ('Alcatel-Lucent / Nokia', '4G and LTE rollout and network monitoring, then telecom '
-                'KPI data work — MPLS and 7750 SR at carrier scale.'),
+               ('Alcatel-Lucent / Nokia', '4G and LTE rollout and network monitoring, then '
+                'telecom KPI data work, with MPLS and 7750 SR at carrier scale.'),
                ('Certification', 'CCNA (Routing & Switching), Cisco Security Green Belt, and '
                 'Alcatel-Lucent Certified Field Expert in MPLS and 7750 SR.')],
         fit=['Your cloud network grew organically and is now effectively flat.',
@@ -444,7 +448,7 @@ def render(p):
   <section class="section section-alt">
     <div class="wrap">
       <p class="eyebrow">Evidence</p>
-      <h2 class="section-title">Where this has been done before</h2>
+      <h2 class="section-title">Where I have done this before</h2>
       <ul class="proof-list">
 {proof}
       </ul>
@@ -493,7 +497,7 @@ def render(p):
       <span class="footer-tag">Cloud &amp; DevOps engineering · Utrecht, NL</span>
     </p>
     <p class="footer-links">
-      Open source: <a href="https://dvrbridge.codeverse.nl/">dvrbridge — RTSP for old CCTV DVRs</a>
+      Open source: <a href="https://dvrbridge.codeverse.nl/">dvrbridge, RTSP for old CCTV DVRs</a>
       · <a href="https://github.com/kiwimato" rel="me noopener">GitHub</a>
     </p>
     <p class="footer-copy">&copy; <span id="year">2026</span> Codeverse — Mihai Cindea. All rights reserved.</p>

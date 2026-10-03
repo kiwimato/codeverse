@@ -80,10 +80,10 @@ TAGS = {
 # A tag with no entry falls back to the generic "Posts filed under X" line.
 TAG_INTRO = {
     'opensource': {
-        'en': 'Small open source tools, each written to fix one specific problem — '
-              'hardware that would not behave, a machine that needed persuading. All on GitHub.',
-        'nl': 'Kleine opensourcetools, elk geschreven om één specifiek probleem op te lossen: '
-              'hardware die niet meewerkt, een machine die overtuiging nodig heeft. Alles staat op GitHub.',
+        'en': 'Small open source tools, each written to fix one specific problem, like '
+              'hardware that would not behave or a machine that needed persuading. All on GitHub.',
+        'nl': 'Kleine opensourcetools, elk geschreven voor één specifiek probleem, zoals '
+              'hardware die niet wilde meewerken of een machine die wat overtuiging nodig had. Alles staat op GitHub.',
     },
 }
 
@@ -107,8 +107,8 @@ UI = {
         latest='Latest posts', tags_h='Browse by topic', feed='RSS feed',
         back='Back to all posts', about_h='About the author',
         about=('Mihai Cindea is a freelance cloud and DevOps engineer in Utrecht. The day job is '
-               'AWS, Terraform and CI/CD — the blog is for that and for everything else that '
-               'got taken apart and put back together.'),
+               'AWS, Terraform and CI/CD. The blog covers that, and anything else that got '
+               'taken apart and put back together.'),
         crumb_home='Blog', not_found='Page not found',
         not_found_lede='That page does not exist here. It may have moved, or the address was mistyped.',
         skip='Skip to content', menu_open='Open menu', crumbs='Breadcrumb', footer_tag='Notes from Utrecht, NL',
@@ -128,9 +128,9 @@ UI = {
         empty='Nog niets gepubliceerd. Het eerste bericht komt eraan.',
         latest='Laatste berichten', tags_h='Op onderwerp', feed='RSS-feed',
         back='Terug naar alle berichten', about_h='Over de auteur',
-        about=('Mihai Cindea is freelance cloud- en DevOps-engineer in Utrecht. Overdag AWS, '
-               'Terraform en CI/CD — dit blog is daarvoor, en voor alles wat verder uit elkaar '
-               'is gehaald en weer in elkaar gezet.'),
+        about=('Mihai Cindea is freelance cloud- en DevOps-engineer in Utrecht. Overdag is dat '
+               'AWS, Terraform en CI/CD. Dit blog gaat daarover, en over alles wat verder uit '
+               'elkaar is gehaald en weer in elkaar gezet.'),
         crumb_home='Blog', not_found='Pagina niet gevonden',
         not_found_lede='Deze pagina bestaat hier niet. Misschien is ze verplaatst, of is het adres verkeerd getypt.',
         skip='Naar de inhoud', menu_open='Menu openen', crumbs='Kruimelpad', footer_tag='Notities uit Utrecht, NL',

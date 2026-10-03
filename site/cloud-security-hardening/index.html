@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cloud Security & Compliance Hardening — AWS, Containers</title>
+<title>Cloud security and compliance hardening: AWS, containers</title>
 <meta name="description" content="Freelance cloud security engineer, Utrecht. AWS WAF, CloudFront and Shield, distroless containers, and Trivy and OWASP ZAP scanning in the pipeline.">
 <link rel="canonical" href="https://codeverse.nl/cloud-security-hardening/">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
@@ -70,7 +70,7 @@
         <span aria-current="page">Cloud security and compliance hardening</span>
       </nav>
       <h1>Cloud security and compliance hardening</h1>
-      <p class="lede">Security has been the lens I look at infrastructure through since building a Slackware-based security distribution with friends in the early 2000s. It is not a phase at the end of a project.</p>
+      <p class="lede">I have looked at infrastructure with security in mind since building a Slackware-based security distribution with friends in the early 2000s, so I build it in from the start of a project instead of leaving it for the end.</p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="/#contact">Start a conversation</a>
         <a class="btn btn-ghost" href="/#work">See the track record</a>
@@ -85,7 +85,7 @@
       <div class="takes-grid">
         <div class="takes-item">
           <h3>The edge</h3>
-          <p>AWS WAF, CloudFront and Shield in front of public-facing load balancers — closing off the part of the estate the internet can actually reach.</p>
+          <p>AWS WAF, CloudFront and Shield in front of public-facing load balancers, which closes off the part of the estate the internet can actually reach.</p>
         </div>
         <div class="takes-item">
           <h3>Containers</h3>
@@ -93,7 +93,7 @@
         </div>
         <div class="takes-item">
           <h3>Shift-left scanning</h3>
-          <p>SonarCloud, Trivy and OWASP ZAP wired into the build, so findings arrive while the code is still fresh rather than in a quarterly report.</p>
+          <p>SonarCloud, Trivy and OWASP ZAP wired into the build, so findings arrive while the code is still fresh instead of in a quarterly report.</p>
         </div>
         <div class="takes-item">
           <h3>Evidence for auditors</h3>
@@ -101,7 +101,7 @@
         </div>
         <div class="takes-item">
           <h3>Network security</h3>
-          <p>Segmentation, VPN estates on pfSense, WireGuard or OpenVPN, and the Cisco background to go with it — CCNA and Cisco Security Green Belt.</p>
+          <p>Segmentation, VPN estates on pfSense, WireGuard or OpenVPN, and the Cisco background to go with it (CCNA and Cisco Security Green Belt).</p>
         </div>
       </div>
     </div>
@@ -115,7 +115,7 @@
         <li>
           <span class="step-num">01</span>
           <h3>Fix the reachable surface first</h3>
-          <p>Effort goes where an attacker can actually get. The public edge and the container runtime before the theoretical risks further down the list.</p>
+          <p>Effort goes where an attacker can actually get in. The public edge and the container runtime come before the theoretical risks further down the list.</p>
         </li>
         <li>
           <span class="step-num">02</span>
@@ -125,7 +125,7 @@
         <li>
           <span class="step-num">03</span>
           <h3>Produce evidence as a by-product</h3>
-          <p>In regulated environments the control is only half the work — proving it ran is the other half. Both should be automatic.</p>
+          <p>In regulated environments, running the control is half the work and proving it ran is the other half. Both should be automatic.</p>
         </li>
       </ol>
     </div>
@@ -134,19 +134,19 @@
   <section class="section section-alt">
     <div class="wrap">
       <p class="eyebrow">Evidence</p>
-      <h2 class="section-title">Where this has been done before</h2>
+      <h2 class="section-title">Where I have done this before</h2>
       <ul class="proof-list">
         <li>
           <span class="proof-who">Knab</span>
-          <span class="proof-what">Moved 34 production services to distroless images, cutting reported vulnerabilities from thousands to under 20, and put AWS WAF, CloudFront and Shield in front of the 3 customer identity endpoints — inside a Dutch bank.</span>
+          <span class="proof-what">Inside a Dutch bank, moved 34 production services to distroless images, cutting reported vulnerabilities from thousands to under 20, and put AWS WAF, CloudFront and Shield in front of the 3 customer identity endpoints.</span>
         </li>
         <li>
-          <span class="proof-who">Knab — pipelines</span>
+          <span class="proof-who">Knab, pipelines</span>
           <span class="proof-what">Integrated SonarCloud, Trivy and OWASP ZAP scanning into Azure DevOps builds to shift security left, and automated the change-management trail around releases.</span>
         </li>
         <li>
           <span class="proof-who">Cisco, via 3Pillar Global</span>
-          <span class="proof-what">Python automation for Cisco FirePower next-generation firewalls — security tooling from the inside.</span>
+          <span class="proof-what">Python automation for Cisco FirePower next-generation firewalls, working on the security tooling itself.</span>
         </li>
       </ul>
     </div>
@@ -158,9 +158,9 @@
         <p class="eyebrow">Fit</p>
         <h2 class="section-title">Probably worth a conversation if</h2>
         <ul class="fit-list">
-          <li>You are regulated, and an audit is coming.</li>
-          <li>Your public endpoints have no WAF in front of them and you know it.</li>
-          <li>Container images are inherited, enormous, and full of things you do not ship.</li>
+          <li>You are regulated and an audit is coming.</li>
+          <li>Your public endpoints have no WAF in front of them, and you know it.</li>
+          <li>Your container images are inherited, enormous and full of things you do not ship.</li>
           <li>Security findings arrive as a PDF once a quarter instead of in the pipeline.</li>
         </ul>
       </div>
@@ -208,7 +208,7 @@
       <span class="footer-tag">Cloud &amp; DevOps engineering · Utrecht, NL</span>
     </p>
     <p class="footer-links">
-      Open source: <a href="https://dvrbridge.codeverse.nl/">dvrbridge — RTSP for old CCTV DVRs</a>
+      Open source: <a href="https://dvrbridge.codeverse.nl/">dvrbridge, RTSP for old CCTV DVRs</a>
       · <a href="https://github.com/kiwimato" rel="me noopener">GitHub</a>
     </p>
     <p class="footer-copy">&copy; <span id="year">2026</span> Codeverse — Mihai Cindea. All rights reserved.</p>
@@ -244,7 +244,7 @@
       "@type": "WebPage",
       "@id": "https://codeverse.nl/cloud-security-hardening/",
       "url": "https://codeverse.nl/cloud-security-hardening/",
-      "name": "Cloud Security & Compliance Hardening — AWS, Containers",
+      "name": "Cloud security and compliance hardening: AWS, containers",
       "description": "Freelance cloud security engineer, Utrecht. AWS WAF, CloudFront and Shield, distroless containers, and Trivy and OWASP ZAP scanning in the pipeline.",
       "inLanguage": "en-GB",
       "isPartOf": {
