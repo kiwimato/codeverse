@@ -3,17 +3,20 @@ title: Modbus praten met een Huawei SUN2000 via zijn eigen wifi, en waarom NAT g
 description: Zonder Smart Dongle spreekt een Huawei SUN2000 alleen Modbus-TCP op zijn eigen wifi. Home Assistant erop krijgen vroeg om een login-proxy en geen NAT.
 date: 2026-10-03
 tags: homelab
-draft: true
+image: inverter-and-battery.jpg
 ---
 
 <!--
-  Zie de Engelse versie voor de TODO's; houd beide talen gelijk als je iets toevoegt.
+  Open: de overstap naar de UAP-Pro is uitgesteld. Zie de Engelse versie; houd beide
+  talen gelijk als je iets toevoegt.
 -->
 
 Het huis in Roemenië heeft een Huawei SUN2000-8K-LC0 met een LUNA2000-batterij en 11,8 kWp
 aan panelen. Huawei's cloud, FusionSolar, laat zien wat hij produceert, maar alleen als
 gemiddelden per vijf minuten. Ik wilde live cijfers in Home Assistant, en op termijn de
 batterij kunnen vertellen *wanneer* hij moet laden. Dat betekent Modbus-TCP, lokaal.
+
+![Een witte Huawei SUN2000-omvormer aan een buitenmuur, met een LUNA2000-batterij eronder op de grond](inverter-and-battery.jpg "De SUN2000-8K-LC0 aan de muur en de LUNA2000-batterij eronder.")
 
 De normale route is Huawei's Smart Dongle, die Modbus op het thuisnetwerk aanbiedt. Deze
 omvormer heeft er geen. Wat hij wel heeft, is een ingebouwd wifi-accesspoint, bedoeld voor de
@@ -157,6 +160,39 @@ Modbus-TCP zegt het niets. En als Modbus volledig stil is gevallen, maakt een lo
 beheerlogin via de app het wakker. Een stroomcyclus doet dat niet. Gebeurt het opnieuw, dan
 log ik één keer in op de app en herstelt Home Assistant vanzelf.
 
+## Waar de verbinding voor is
+
+Met de sessie op zijn plek is Home Assistant meer dan een scherm om naar te kijken. De
+proxy logt in met installateursrechten, dus dezelfde Modbus-verbinding schrijft ook
+instellingen terug naar de omvormer.
+
+De batterij is het voor de hand liggende voorbeeld. Vanuit één dashboard stel ik de
+werkmodus in (bij mij time of use), of de batterij uit het net mag laden, het maximale laad-
+en ontlaadvermogen, de laadtoestand waarop laden en ontladen stoppen, en het
+time-of-use-schema zelf. Het schema hieronder ontlaadt 's nachts en 's ochtends, laadt
+tussen 13:00 en 16:30, en ontlaadt 's avonds weer.
+
+![Home Assistant-dashboard met batterij-instellingen, een time-of-use-schema, een grafiek van de laadtoestand over zeven dagen en een temperatuurgrafiek](ha-battery-control.png "Batterijbeheer in Home Assistant. De labels zijn Roemeens; de waarden in de linkerkolom worden naar de omvormer geschreven. Let op de gaten rond 2 en 3 oktober.")
+
+Minder voor de hand liggend is het blindvermogen. De omvormer schakelt af als de
+netspanning op het aansluitpunt 253 V bereikt. Het net hier is overbelast, en rond het
+middaguur kruipt de spanning bij mijn meter de meeste dagen naar die grens toe; het
+maximum per uur raakte hem deze ene week een paar keer. Voordat het zover is, hoort een
+P(U)-curve het werkelijk vermogen terug te schroeven en een Q(U)-curve de omvormer
+blindvermogen te laten opnemen. Dat drukt de spanning omlaag en houdt de omvormer aan het
+net, in plaats van dat hij in een noodstop schiet. Beide curves zijn instellingen van de
+omvormer, dus ik kan ze vanuit Home Assistant afstellen en het effect op hetzelfde scherm
+volgen.
+
+![Home Assistant-dashboard met netspanning tegenover werkelijk en blindvermogen, en de maximale en gemiddelde netspanning per uur over zeven dagen met een grenslijn op 253 V](ha-grid-voltage.png "Netspanning tegenover de afschakelgrens van 253 V. De omvormer draait op zijn Q-U-curve.")
+
+Dit via de eigen wifi van de omvormer doen heeft een prijs, en de screenshots laten die
+zien. De verbinding met het accesspoint is niet altijd betrouwbaar, en als die wegvalt,
+valt de data ook weg: de temperatuurgrafiek heeft gaten rond 2 en 3 oktober, en de lijn
+van de laadtoestand trekt gewoon een rechte streep van het laatste punt voor het gat naar
+het eerste erna. Een Smart Dongle op het thuisnetwerk zou waarschijnlijk stabieler zijn.
+Voorlopig koop ik er geen, want wat ik nu heb is voor mij stabiel genoeg.
+
 ## Volgende stap: laat een accesspoint het doen
 
 Dit alles draait op een server met een USB-stick eraan, en dat is de zwakste schakel. Het
@@ -189,7 +225,7 @@ op dat accesspoint knipperen telkens als die van de omvormer dat deed. Die 2,4 G
 daarom helemaal voor de omvormer, en de 5 GHz-radio en de andere twee accesspoints bedienen
 het huis.
 
-<!-- TODO: resultaat van de overstap zodra die een tijdje draait -->
+De overstap heb ik voorlopig uitgesteld, dus de USB-stick doet het werk nog steeds.
 
 ## Wat ik mezelf aan het begin had willen vertellen
 

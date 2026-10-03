@@ -3,20 +3,20 @@ title: Talking Modbus to a Huawei SUN2000 over its own WiFi, and why NAT is not 
 description: Without a Smart Dongle, a Huawei SUN2000 only speaks Modbus-TCP on its own WiFi AP. Getting Home Assistant on it meant a login proxy and no NAT.
 date: 2026-10-03
 tags: homelab
-draft: true
+image: inverter-and-battery.jpg
 ---
 
 <!--
-  Optional additions — each marked TODO below:
-  - a photo of the inverter / the USB stick / the UniFi AP
-  - a Home Assistant dashboard screenshot once data is flowing again
-  - the outcome of the UAP-Pro cutover (last section) once it has run for a while
+  Open: the UAP-Pro cutover is postponed. When it happens, replace the paragraph
+  under "Next: let an access point do it" with how it went.
 -->
 
 The house in Romania has a Huawei SUN2000-8K-LC0 with a LUNA2000 battery and 11.8 kWp of
 panels. Huawei's cloud, FusionSolar, shows what it produces, but only as five-minute
 averages. I wanted live numbers in Home Assistant, and eventually the ability to tell the
 battery *when* to charge. That means Modbus-TCP, locally.
+
+![A white Huawei SUN2000 inverter on an outside wall, with a LUNA2000 battery standing on the ground below it](inverter-and-battery.jpg "The SUN2000-8K-LC0 on the wall and the LUNA2000 battery below it.")
 
 The normal way to get it is Huawei's Smart Dongle, which exposes Modbus on the house LAN.
 This inverter does not have one. What it does have is a built-in WiFi access point, meant
@@ -159,6 +159,37 @@ tells you nothing about Modbus-TCP. And when Modbus has gone fully silent, what 
 a local management login from the app. A power cycle does not. If it happens again, I log
 into the app once and Home Assistant recovers on its own.
 
+## What the link is for
+
+With the session in place, Home Assistant is not just a read-only display. The proxy logs in
+with installer rights, so the same Modbus connection writes settings back to the inverter.
+
+The battery is the obvious use. From one dashboard I set the working mode (time of use, in
+my case), whether the battery may charge from the grid, the maximum charge and discharge
+power, the state-of-charge limits for when charging and discharging stop, and the
+time-of-use schedule itself. The schedule below discharges overnight and through the
+morning, charges between 13:00 and 16:30, and discharges again in the evening.
+
+![Home Assistant dashboard with battery controls, a time-of-use schedule, a seven-day state-of-charge graph and a temperature graph](ha-battery-control.png "Battery control in Home Assistant. The labels are in Romanian; the values in the left column are written to the inverter. Note the gaps around 2 and 3 October.")
+
+The less obvious use is reactive power. The inverter disconnects when the grid voltage at
+the connection point reaches 253 V. The local grid is congested, and around midday the
+voltage at my meter climbs towards that limit on most days; the hourly maximum touched it
+several times in this one week. Before it gets there, a P(U) curve should cut active power
+and a Q(U) curve should make the inverter absorb reactive power, which pulls the voltage
+down and keeps the inverter connected instead of tripping into an emergency shutdown. Both
+curves are inverter settings, so I can tune them from Home Assistant and watch the effect
+on the same screen.
+
+![Home Assistant dashboard showing grid voltage against active and reactive power, and hourly maximum and average grid voltage over seven days with a 253 V threshold line](ha-grid-voltage.png "Grid voltage against the 253 V disconnection threshold. The inverter is running on its Q-U curve.")
+
+There is a cost to doing this over the inverter's own WiFi, and the screenshots show it.
+The link to the AP is not always reliable, and when it drops, so does the data: the
+temperature graph has holes around 2 and 3 October, and the state-of-charge line simply joins
+the last point before the gap to the first one after it. A Smart Dongle on the house LAN
+would probably be more stable. For now I have decided not to buy one, because what I have
+is stable enough for me.
+
 ## Next: let an access point do it
 
 All of this lives on a server with a USB stick hanging off it, which is the weakest part
@@ -188,7 +219,7 @@ reliable, so if they shared the radio, the house WiFi on that AP would blink eve
 inverter's did. That 2.4 GHz radio is therefore dedicated to the inverter link, and the
 5 GHz radio and the other two APs carry the house.
 
-<!-- TODO: outcome of the cutover once it has run for a while -->
+I have postponed the cutover for now, so the USB stick is still doing the job.
 
 ## What I would tell myself at the start
 
