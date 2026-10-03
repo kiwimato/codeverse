@@ -1,5 +1,7 @@
 # codeverse.nl — freelance site
 
+**Live:** [codeverse.nl](https://codeverse.nl) · **Blog:** [blog.codeverse.nl](https://blog.codeverse.nl)
+
 The Codeverse business site. Lives in [`site/`](site/). Plain semantic HTML, hand-written
 CSS and ~90 lines of vanilla JS — no framework, no build step, no external requests
 (system fonts, so nothing is fetched from a Google Fonts CDN, which also keeps the site
