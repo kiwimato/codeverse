@@ -1,7 +1,7 @@
 # AGENTS.md — the blog (blog.codeverse.nl)
 
 Instructions for anyone, human or agent, writing or changing posts. The deeper
-reference is the `## The blog` section of `../CODEVERSE-SITE.md`; this file is the
+reference is the `## The blog` section of `../README.md`; this file is the
 working checklist.
 
 ## How it works
@@ -52,7 +52,7 @@ blog/                     OUTPUT. Wiped and rewritten on every build. Never edit
 
    ```bash
    python3 tools/build-blog.py
-   wrangler pages deploy ~/code/my-resume/blog --project-name=codeverse-blog --branch=main --commit-dirty=true
+   wrangler pages deploy ~/code/codeverse/blog --project-name=codeverse-blog --branch=main --commit-dirty=true
    python3 tools/indexnow.py https://blog.codeverse.nl/sitemap.xml
    ```
 

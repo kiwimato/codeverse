@@ -5,8 +5,9 @@ CSS and ~90 lines of vanilla JS — no framework, no build step, no external req
 (system fonts, so nothing is fetched from a Google Fonts CDN, which also keeps the site
 trivially clean under GDPR).
 
-The old Pillar-based CV at the repo root (`index.html`, `assets/`) is untouched and still
-serves `resume.dacia.ninja`.
+The blog at `blog.codeverse.nl` lives in this repo too (see "The blog" below). The CV and
+the old Pillar CV page (`resume.dacia.ninja`) live in the separate private `my-resume` repo.
+This repo holds nothing private: the contact address on the site is a disposable alias.
 
 ```
 site/
@@ -36,6 +37,8 @@ tools/
 ├── build-blog.py                 Markdown -> blog/ (zero dependencies)
 ├── blog.css                      blog-only styles, layered on site/assets/css/style.css
 ├── refresh-csp.py                re-derives the CSP hash allow-list in _headers
+├── indexnow.py                   ping IndexNow with every URL in a live sitemap
+├── strip-exif.py                 remove EXIF/GPS from photos before they go into a post
 └── og-image.html                 source for og.png
 ```
 
@@ -147,7 +150,7 @@ terraform apply apply.tfplan
 Then push the assets (same direct-upload pattern as `dvrbridge` and `omenie`):
 
 ```bash
-wrangler pages deploy ~/code/my-resume/site --project-name=codeverse --branch=main
+wrangler pages deploy ~/code/codeverse/site --project-name=codeverse --branch=main
 ```
 
 `_headers` is picked up automatically from the deploy root — CSP, HSTS, `nosniff`,
@@ -316,7 +319,7 @@ Infrastructure: `../terraform/cloudflare_pages_blog.tf` (project + custom domain
 
 ```bash
 python3 tools/build-blog.py
-wrangler pages deploy ~/code/my-resume/blog --project-name=codeverse-blog --branch=main
+wrangler pages deploy ~/code/codeverse/blog --project-name=codeverse-blog --branch=main
 ```
 
 Both are the same direct-upload pattern as the main site; nothing deploys on git push.
@@ -339,37 +342,25 @@ sitemap is submitted under the `codeverse.nl` domain property in Search Console 
 the `name` of the CNAME record, and the three "Blog" nav links in the main site
 (`site/index.html`, `NAV` in `tools/build-service-pages.py`). That is the whole list.
 
-### The first post
+### Writing posts
 
-`posts/lovens-explorer-aluminium-rod/` holds the Lovens Explorer write-up as a **draft
-skeleton** in both languages: the section structure is there, every `TODO` is a question
-only you can answer (which rod, why it failed, what you did, parts and cost). Fill it in,
-add the photos it references (`hero.jpg`, `broken.jpg`, `fixed.jpg`), remove `draft: true`,
-rebuild, deploy.
+The step-by-step authoring guide, content rules and supported Markdown are in
+[`posts/AGENTS.md`](posts/AGENTS.md).
 
 ---
 
 ## Open items — need your input
 
-1. **Mercell / AI work.** You asked me to fold in your current AI work at Mercell. I have
-   no saved memory of it and nothing in this repo mentions it, so I did not invent an
-   engagement. `RESUME.md` still shows Knab as *Oct 2023 – Present*. Send me the dates,
-   role and a few specifics and I will add it as the top engagement (and update
-   `RESUME.md` and the JSON-LD to match).
-2. **A photo of you.** `assets/images/profile.jpg` is the **Pillar theme's stock demo
-   headshot** — it is a photo of a stranger, and it was commented out in your original
-   `index.html`, which is presumably why. I removed it rather than publish it as you, and
+1. **A photo of you.** The old CV's `assets/images/profile.jpg` (in the `my-resume` repo)
+   is the **Pillar theme's stock demo headshot** — a photo of a stranger, never use it. I removed it rather than publish it as you, and
    the hero now uses a decorative `main.tf` card instead. If you want a portrait there,
    drop a square image at `site/assets/img/mihai.jpg` and swap the two blocks in the hero
    — the markup is already written and commented in place.
-3. **KVK / BTW numbers.** Dutch B2B clients look for these. There is a commented-out
+2. **KVK / BTW numbers.** Dutch B2B clients look for these. There is a commented-out
    footer block in `site/index.html` ready for them.
-4. **Availability line.** The hero chip currently states location only. There is a comment
+3. **Availability line.** The hero chip currently states location only. There is a comment
    above it with wording for "Available for new engagements" / "Booked until Q1 2027" if
    you want to signal availability.
-5. **`resume.codeverse.nl`.** Still points at the ocean droplet and still serves the
+4. **`resume.codeverse.nl`.** Still points at the ocean droplet and still serves the
    placeholder. Decide whether to point it at the old Pillar CV, redirect it to
    `codeverse.nl`, or drop the record.
-
-Not done, deliberately: nothing was applied to Cloudflare and nothing was committed — the
-Terraform is written and ready for you to plan and apply yourself.

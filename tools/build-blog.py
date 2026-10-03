@@ -36,7 +36,7 @@ Output (everything under blog/, which IS the deploy root):
 
 Deploy:
 
-    wrangler pages deploy ~/code/my-resume/blog --project-name=codeverse-blog --branch=main
+    wrangler pages deploy ~/code/codeverse/blog --project-name=codeverse-blog --branch=main
 """
 import argparse
 import base64
