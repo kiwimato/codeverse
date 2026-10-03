@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Network Engineering — Hybrid Cloud, VPN & Segmentation</title>
+<meta name="description" content="Freelance network engineer, Utrecht. Hybrid cloud connectivity, segmentation, and VPN estates on pfSense, WireGuard and OpenVPN. CCNA certified.">
+<link rel="canonical" href="https://codeverse.nl/network-engineering/">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="author" content="Mihai Cindea">
+
+<meta name="geo.region" content="NL-UT">
+<meta name="geo.placename" content="Utrecht, Netherlands">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Codeverse">
+<meta property="og:title" content="Network engineering and connectivity — Codeverse">
+<meta property="og:description" content="Freelance network engineer, Utrecht. Hybrid cloud connectivity, segmentation, and VPN estates on pfSense, WireGuard and OpenVPN. CCNA certified.">
+<meta property="og:url" content="https://codeverse.nl/network-engineering/">
+<meta property="og:locale" content="en_GB">
+<meta property="og:image" content="https://codeverse.nl/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Network engineering and connectivity — Codeverse">
+<meta name="twitter:description" content="Freelance network engineer, Utrecht. Hybrid cloud connectivity, segmentation, and VPN estates on pfSense, WireGuard and OpenVPN. CCNA certified.">
+<meta name="twitter:image" content="https://codeverse.nl/assets/img/og.png">
+
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="/favicon.ico">
+<link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/" aria-label="Codeverse home">
+      <svg class="brand-mark" width="28" height="28" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+        <path d="M16 2.6 28 9.3v13.4L16 29.4 4 22.7V9.3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M20.6 12.2a5.8 5.8 0 1 0 0 7.6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+      </svg>
+      <span class="brand-text">Codeverse</span>
+    </a>
+
+    <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="site-nav" id="site-nav" aria-label="Primary">
+      <a href="/#services">Services</a>
+      <a href="/#approach">Approach</a>
+      <a href="/#work">Engagements</a>
+      <a href="/#coverage">Where I work</a>
+      <a href="/#about">About</a>
+      <a href="https://blog.codeverse.nl/">Blog</a>
+      <a class="nav-cta" href="/#contact">Get in touch</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="section page-head">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">Codeverse</a> <span aria-hidden="true">/</span>
+        <a href="/#services">Services</a> <span aria-hidden="true">/</span>
+        <span aria-current="page">Network engineering and connectivity</span>
+      </nav>
+      <h1>Network engineering and connectivity</h1>
+      <p class="lede">Before cloud I did telecom — 4G and LTE rollout, MPLS, and Alcatel-Lucent 7750 SR service routers. That background is why cloud networking problems tend not to surprise me.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="/#contact">Start a conversation</a>
+        <a class="btn btn-ghost" href="/#work">See the track record</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="wrap">
+      <p class="eyebrow">Scope</p>
+      <h2 class="section-title">What I take on</h2>
+      <div class="takes-grid">
+        <div class="takes-item">
+          <h3>Hybrid connectivity</h3>
+          <p>Joining an office, a data centre and a cloud estate together without creating one flat network where everything can reach everything.</p>
+        </div>
+        <div class="takes-item">
+          <h3>Segmentation</h3>
+          <p>VPC and subnet design, security groups and routing that reflect an actual trust model rather than whatever was quickest at the time.</p>
+        </div>
+        <div class="takes-item">
+          <h3>VPN estates</h3>
+          <p>pfSense, WireGuard and OpenVPN — site-to-site and remote access, built to be operated rather than admired.</p>
+        </div>
+        <div class="takes-item">
+          <h3>Load balancing and failover</h3>
+          <p>HAProxy and Keepalived for services that cannot afford a single point of failure.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <p class="eyebrow">Method</p>
+      <h2 class="section-title">How it runs</h2>
+      <ol class="steps">
+        <li>
+          <span class="step-num">01</span>
+          <h3>Draw the real topology</h3>
+          <p>Almost every network engagement starts by discovering the diagram is out of date. That discovery is usually the most valuable week.</p>
+        </li>
+        <li>
+          <span class="step-num">02</span>
+          <h3>Default deny, then open deliberately</h3>
+          <p>Segmentation is only worth anything if the default is closed. Retrofitting that is work, but it is finite work.</p>
+        </li>
+        <li>
+          <span class="step-num">03</span>
+          <h3>Document it for the person on call</h3>
+          <p>A network nobody but you can reason about is a liability, however elegant it is.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="wrap">
+      <p class="eyebrow">Evidence</p>
+      <h2 class="section-title">Where this has been done before</h2>
+      <ul class="proof-list">
+        <li>
+          <span class="proof-who">Patchman</span>
+          <span class="proof-what">Scaled Redis, PostgreSQL and Nginx for high availability using Keepalived and HAProxy across a Linode estate.</span>
+        </li>
+        <li>
+          <span class="proof-who">Alcatel-Lucent / Nokia</span>
+          <span class="proof-what">4G and LTE rollout and network monitoring, then telecom KPI data work — MPLS and 7750 SR at carrier scale.</span>
+        </li>
+        <li>
+          <span class="proof-who">Certification</span>
+          <span class="proof-what">CCNA (Routing &amp; Switching), Cisco Security Green Belt, and Alcatel-Lucent Certified Field Expert in MPLS and 7750 SR.</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap fit-inner">
+      <div>
+        <p class="eyebrow">Fit</p>
+        <h2 class="section-title">Probably worth a conversation if</h2>
+        <ul class="fit-list">
+          <li>Your cloud network grew organically and is now effectively flat.</li>
+          <li>You need a site-to-site or remote-access VPN estate someone can actually maintain.</li>
+          <li>A hybrid setup needs joining up without opening everything to everything.</li>
+          <li>You want a segmentation model designed once, by someone who did this before cloud.</li>
+        </ul>
+      </div>
+      <aside class="related">
+        <h3>Related services</h3>
+        <a class="related-card" href="/cloud-security-hardening/">
+          <span class="related-label">Cloud security and compliance hardening</span>
+          <span class="related-go">Read more</span>
+        </a>
+        <a class="related-card" href="/aws-cloud-consultant/">
+          <span class="related-label">AWS cloud architecture and migration</span>
+          <span class="related-go">Read more</span>
+        </a>
+        <a class="related-card" href="/observability-monitoring/">
+          <span class="related-label">Observability and monitoring</span>
+          <span class="related-go">Read more</span>
+        </a>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section section-contact">
+    <div class="wrap">
+      <div class="contact-card">
+        <p class="eyebrow">Contact</p>
+        <h2 class="section-title">Tell me what is actually broken</h2>
+        <p class="section-lede">
+          The contact details live on the front page. If I am not the right person for this,
+          I will say so.
+        </p>
+        <div class="contact-actions">
+          <a class="btn btn-primary" href="/#contact">Get in touch</a>
+          <a class="btn btn-ghost" href="/">Back to the front page</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <p class="footer-brand">
+      <span class="brand-text">Codeverse</span>
+      <span class="footer-tag">Cloud &amp; DevOps engineering · Utrecht, NL</span>
+    </p>
+    <p class="footer-links">
+      Open source: <a href="https://dvrbridge.codeverse.nl/">dvrbridge — RTSP for old CCTV DVRs</a>
+      · <a href="https://github.com/kiwimato" rel="me noopener">GitHub</a>
+    </p>
+    <p class="footer-copy">&copy; <span id="year">2026</span> Codeverse — Mihai Cindea. All rights reserved.</p>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      "@id": "https://codeverse.nl/network-engineering/#service",
+      "name": "Network engineering and connectivity",
+      "description": "Freelance network engineer, Utrecht. Hybrid cloud connectivity, segmentation, and VPN estates on pfSense, WireGuard and OpenVPN. CCNA certified.",
+      "serviceType": "Network engineering and connectivity",
+      "provider": {
+        "@id": "https://codeverse.nl/#business"
+      },
+      "areaServed": [
+        {
+          "@type": "Country",
+          "name": "Netherlands"
+        },
+        {
+          "@type": "Place",
+          "name": "European Union (remote)"
+        }
+      ],
+      "url": "https://codeverse.nl/network-engineering/"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://codeverse.nl/network-engineering/",
+      "url": "https://codeverse.nl/network-engineering/",
+      "name": "Network Engineering — Hybrid Cloud, VPN & Segmentation",
+      "description": "Freelance network engineer, Utrecht. Hybrid cloud connectivity, segmentation, and VPN estates on pfSense, WireGuard and OpenVPN. CCNA certified.",
+      "inLanguage": "en-GB",
+      "isPartOf": {
+        "@id": "https://codeverse.nl/#website"
+      },
+      "about": {
+        "@id": "https://codeverse.nl/network-engineering/#service"
+      },
+      "breadcrumb": {
+        "@id": "https://codeverse.nl/network-engineering/#breadcrumb"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://codeverse.nl/network-engineering/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Codeverse",
+          "item": "https://codeverse.nl/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Services",
+          "item": "https://codeverse.nl/#services"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Network engineering and connectivity"
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<script src="/assets/js/main.js" defer></script>
+</body>
+</html>

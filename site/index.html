@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Freelance Cloud &amp; DevOps Engineer, Utrecht &amp; Remote</title>
+<meta name="description" content="Freelance cloud and DevOps engineer in Utrecht. AWS, Terraform, CI/CD and security hardening — across the Randstad, or fully remote in the EU.">
+<link rel="canonical" href="https://codeverse.nl/">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="author" content="Mihai Cindea">
+
+<!-- Local search signals. Google leans on the page copy and the JSON-LD below far
+     more than on these, but they are cheap and some crawlers still read them. -->
+<meta name="geo.region" content="NL-UT">
+<meta name="geo.placename" content="Utrecht, Netherlands">
+<meta name="geo.position" content="52.0907;5.1214">
+<meta name="ICBM" content="52.0907, 5.1214">
+<meta name="keywords" content="freelance DevOps engineer, freelance cloud engineer, AWS consultant Netherlands, Terraform consultant, ZZP DevOps engineer, interim cloud engineer, DevOps Utrecht, DevOps Amsterdam, cloud engineer Noord-Holland, DevOps Randstad, remote DevOps engineer, fully remote cloud consultant, CI/CD consultant, Kubernetes freelancer, AWS security hardening, infrastructure as code consultant">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Codeverse">
+<meta property="og:title" content="Freelance Cloud &amp; DevOps Engineer — Utrecht, Amsterdam &amp; Remote">
+<meta property="og:description" content="AWS architecture, Terraform, CI/CD and security hardening for regulated and high-availability platforms. On-site in the Randstad or fully remote across the EU.">
+<meta property="og:url" content="https://codeverse.nl/">
+<meta property="og:locale" content="en_GB">
+<meta property="og:image" content="https://codeverse.nl/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Codeverse — freelance cloud and DevOps engineering, Utrecht">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Freelance Cloud &amp; DevOps Engineer — Utrecht, Amsterdam &amp; Remote">
+<meta name="twitter:description" content="AWS, Terraform, CI/CD and security hardening. On-site in the Randstad or fully remote across the EU.">
+<meta name="twitter:image" content="https://codeverse.nl/assets/img/og.png">
+
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="/favicon.ico">
+<link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header" id="top">
+  <div class="wrap header-inner">
+    <a class="brand" href="/" aria-label="Codeverse home">
+      <svg class="brand-mark" width="28" height="28" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+        <path d="M16 2.6 28 9.3v13.4L16 29.4 4 22.7V9.3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M20.6 12.2a5.8 5.8 0 1 0 0 7.6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+      </svg>
+      <span class="brand-text">Codeverse</span>
+    </a>
+
+    <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="site-nav" id="site-nav" aria-label="Primary">
+      <a href="#services">Services</a>
+      <a href="#approach">Approach</a>
+      <a href="#work">Engagements</a>
+      <a href="#coverage">Where I work</a>
+      <a href="#about">About</a>
+      <a href="https://blog.codeverse.nl/">Blog</a>
+      <a class="nav-cta" href="#contact">Get in touch</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ───────────────────────── Hero ───────────────────────── -->
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <div class="hero-copy">
+        <!-- Availability chip. Edit the text, or delete this <p> entirely.
+             Suggested alternatives:
+               "Available for new engagements"
+               "Booked until Q1 2027 — taking enquiries"  -->
+        <p class="chip"><span class="chip-dot" aria-hidden="true"></span>Utrecht · Amsterdam · the Randstad · fully remote across the EU</p>
+
+        <h1>Cloud infrastructure that holds up in production<span class="accent"> — and under audit.</span></h1>
+
+        <p class="lede">
+          Codeverse is the independent practice of <strong>Mihai Cindea</strong>, a freelance cloud and DevOps
+          engineer based in Utrecht. Twenty years of building, automating and hardening infrastructure for
+          online banks, fleet operators and scale-ups — AWS, Terraform, CI/CD and the security work that
+          makes all of it defensible. On-site across Noord-Holland and the Randstad, or fully remote.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#contact">Start a conversation</a>
+          <a class="btn btn-ghost" href="#work">See the track record</a>
+        </div>
+      </div>
+
+      <!-- Decorative only — no information here that isn't in the copy above.
+           To use a real photo of yourself instead, delete this <div> and
+           uncomment the <figure> below it, then drop the image in as
+           /assets/img/mihai.jpg (square, 480x480 or larger). -->
+      <div class="hero-visual" aria-hidden="true">
+        <div class="term">
+          <div class="term-bar"><span></span><span></span><span></span>
+            <p class="term-title">main.tf</p>
+          </div>
+          <pre class="term-body"><code><span class="k">module</span> <span class="s">"platform"</span> {
+  <span class="a">source</span>  = <span class="s">"./modules/aws-baseline"</span>
+
+  <span class="a">environment</span>   = <span class="s">"production"</span>
+  <span class="a">waf_enabled</span>   = <span class="b">true</span>
+  <span class="a">distroless</span>    = <span class="b">true</span>
+  <span class="a">log_retention</span> = <span class="n">365</span>
+}
+
+<span class="c"># plan: 0 to add, 0 to change, 0 to destroy.</span>
+<span class="c"># the good kind of boring.</span></code></pre>
+        </div>
+      </div>
+
+      <!--
+      <figure class="hero-portrait">
+        <img src="/assets/img/mihai.jpg" width="360" height="360" alt="Mihai Cindea, freelance cloud and DevOps engineer, Utrecht" loading="eager" decoding="async">
+      </figure>
+      -->
+    </div>
+
+    <div class="wrap">
+      <div class="clients" aria-label="Organisations worked with">
+        <span class="clients-label">Infrastructure delivered for</span>
+        <ul>
+          <li>Mercell</li><li>Knab</li><li>LeasePlan</li><li>3D&nbsp;Hubs</li><li>Patchman</li><li>Cisco</li><li>Nokia&nbsp;/&nbsp;Alcatel-Lucent</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────── Services ─────────────────────── -->
+  <section id="services" class="section">
+    <div class="wrap">
+      <p class="eyebrow">Services</p>
+      <h2 class="section-title">What I get hired to do</h2>
+      <p class="section-lede">
+        Usually one of these is the reason someone calls. Usually two or three of them are the reason the
+        problem existed in the first place.
+      </p>
+
+      <div class="grid grid-3">
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 18a4.5 4.5 0 0 1-.5-8.97A6 6 0 0 1 17.7 8.4 4.3 4.3 0 0 1 17.5 18z"/><path d="M12 12v5"/><path d="m9.5 14.5 2.5-2.5 2.5 2.5"/></svg>
+          </div>
+          <h3>Cloud architecture &amp; migration</h3>
+          <p>
+            AWS designs that survive contact with real traffic and real auditors: multi-account layouts,
+            ECS and EC2 workloads, RDS, S3, API Gateway. Legacy estates moved off tin in stages, not in one
+            terrifying weekend.
+          </p>
+          <a class="card-link" href="/aws-cloud-consultant/">More on AWS architecture</a>
+        </article>
+
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/><circle cx="9" cy="6" r="2" fill="var(--bg)"/><circle cx="15" cy="12" r="2" fill="var(--bg)"/><circle cx="8" cy="18" r="2" fill="var(--bg)"/></svg>
+          </div>
+          <h3>Infrastructure as Code</h3>
+          <p>
+            Terraform-first. Click-ops turned into reviewable modules with a state strategy that does not
+            terrify the next engineer, plus Ansible or Puppet for the configuration layer underneath.
+          </p>
+          <a class="card-link" href="/terraform-consultant/">More on Terraform work</a>
+        </article>
+
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8a4 4 0 0 1 4-4h8"/><path d="m13 1.5 3 2.5-3 2.5"/><path d="M20 16a4 4 0 0 1-4 4H8"/><path d="m11 22.5-3-2.5 3-2.5"/><circle cx="5" cy="16" r="2.5"/><circle cx="19" cy="8" r="2.5"/></svg>
+          </div>
+          <h3>CI/CD &amp; developer experience</h3>
+          <p>
+            Azure DevOps, GitHub Actions, Jenkins. Pipelines that release safely and predictably, with
+            dependency updates, compliance evidence and ticketing automated instead of nagged about.
+          </p>
+          <a class="card-link" href="/cicd-devops-engineer/">More on CI/CD and developer experience</a>
+        </article>
+
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 20 6v6c0 4.5-3.2 7.9-8 9-4.8-1.1-8-4.5-8-9V6z"/><path d="m9 12 2 2 4-4"/></svg>
+          </div>
+          <h3>Security &amp; compliance hardening</h3>
+          <p>
+            Edge protection with WAF, CloudFront and Shield. Distroless containers. Scanning shifted left
+            into the build with SonarCloud, Trivy and OWASP ZAP — so the audit is a report, not a project.
+          </p>
+          <a class="card-link" href="/cloud-security-hardening/">More on security hardening</a>
+        </article>
+
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17.5 8 11l4 3.5L21 5"/><path d="M16 5h5v5"/><path d="M3 21h18"/></svg>
+          </div>
+          <h3>Observability that earns its keep</h3>
+          <p>
+            New Relic, Datadog, Prometheus, Grafana, Splunk. Custom checks and alerts tuned so a page means
+            something is actually wrong — and so bottlenecks surface before your users find them.
+          </p>
+          <a class="card-link" href="/observability-monitoring/">More on observability</a>
+        </article>
+
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2.5"/><circle cx="5" cy="19" r="2.5"/><circle cx="19" cy="19" r="2.5"/><path d="M12 7.5v4M12 11.5 6.5 17M12 11.5 17.5 17"/></svg>
+          </div>
+          <h3>Networking &amp; connectivity</h3>
+          <p>
+            A Cisco-certified network background applied to cloud problems: hybrid connectivity,
+            segmentation, MPLS, and VPN estates on pfSense, WireGuard or OpenVPN.
+          </p>
+          <a class="card-link" href="/network-engineering/">More on network engineering</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────── Approach ─────────────────────── -->
+  <section id="approach" class="section section-alt">
+    <div class="wrap">
+      <p class="eyebrow">Approach</p>
+      <h2 class="section-title">How the work goes</h2>
+      <p class="section-lede">
+        I am a contractor, not a dependency. The goal of every engagement is a system your own team can
+        run confidently after I leave.
+      </p>
+
+      <ol class="steps">
+        <li>
+          <span class="step-num">01</span>
+          <h3>Understand before touching</h3>
+          <p>
+            Read the estate as it actually is, not as the diagram claims. Find where the risk, the cost and
+            the manual toil really live, and agree on what "done" looks like before anything is changed.
+          </p>
+        </li>
+        <li>
+          <span class="step-num">02</span>
+          <h3>Automate the repeatable part</h3>
+          <p>
+            Codify it in Terraform, wire it into the pipeline, and put scanning and monitoring around it.
+            Incremental, reviewable changes — production keeps running throughout.
+          </p>
+        </li>
+        <li>
+          <span class="step-num">03</span>
+          <h3>Hand it over properly</h3>
+          <p>
+            Documentation, modules and runbooks your engineers own. If the handover only works while I'm
+            still on the invoice, the job wasn't finished.
+          </p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ────────────────────── Engagements ───────────────────── -->
+  <section id="work" class="section">
+    <div class="wrap">
+      <p class="eyebrow">Selected engagements</p>
+      <h2 class="section-title">Twenty years, in the parts that matter</h2>
+
+      <div class="timeline">
+
+        <article class="engagement">
+          <header>
+            <div>
+              <h3>Mercell <span class="sector">· procurement software, Utrecht</span></h3>
+              <p class="role">Senior Cloud Engineer · freelance</p>
+            </div>
+            <p class="period">May 2026 — present</p>
+          </header>
+          <ul>
+            <li>Led an AWS credential cleanup across 150+ AWS accounts — inventoried hundreds of static access keys, attributed their use through CloudTrail, and moved workloads onto short-lived OIDC and IRSA credentials.</li>
+            <li>Built AI platform capability: a sandboxed AI coding agent rolled out to 11 developers, and an LLM cost dashboard in Athena and Grafana giving one view of all LLM spend across OpenAI, Amazon Bedrock and Anthropic.</li>
+            <li>Kept the company's main legacy .NET 4 application inside CI/CD with GitHub Actions workflows and purpose-built VM images.</li>
+          </ul>
+          <p class="chips"><span>AWS Bedrock</span><span>Athena</span><span>IAM</span><span>CloudTrail</span><span>Terraform</span><span>Terragrunt</span><span>GitHub Actions</span><span>Backstage</span><span>Grafana</span><span>OIDC</span><span>IRSA</span><span>LangChain</span><span>Claude</span></p>
+        </article>
+
+        <article class="engagement">
+          <header>
+            <div>
+              <h3>Knab <span class="sector">· online bank, Amsterdam</span></h3>
+              <p class="role">Senior Cloud Engineer — Developer Experience team · freelance</p>
+            </div>
+            <p class="period">Oct 2023 — Apr 2026</p>
+          </header>
+          <ul>
+            <li>Hardened the container estate by migrating 34 production services to distroless images, cutting reported vulnerabilities from thousands to under 20.</li>
+            <li>Put AWS WAF, CloudFront and Shield in front of the bank's 3 customer identity (CIAM) endpoints — the public entry points customer authentication depends on.</li>
+            <li>Migrated 7 applications onto a new Kubernetes cluster, building the Azure DevOps deployment pipelines and configuring Istio service mesh routing and Keycloak-based authentication.</li>
+            <li>Automated compliance reporting and dependency updates with OpsLevel and RenovateBot, cutting technical debt and the cognitive load carried by product teams.</li>
+          </ul>
+          <p class="chips"><span>AWS ECS</span><span>RDS</span><span>CloudFront</span><span>DynamoDB</span><span>API Gateway</span><span>Terraform</span><span>Azure DevOps</span><span>Kubernetes</span><span>Istio</span><span>Keycloak</span><span>New Relic</span><span>Python</span></p>
+        </article>
+
+        <article class="engagement">
+          <header>
+            <div>
+              <h3>LeasePlan <span class="sector">· international fleet leasing</span></h3>
+              <p class="role">Senior Cloud Engineer · freelance</p>
+            </div>
+            <p class="period">Aug 2022 — Sep 2023</p>
+          </header>
+          <ul>
+            <li>Ran and automated SAP OpenText hosting on AWS with high availability as the hard requirement.</li>
+            <li>Replaced manual OpenText instance setup with Terraform and Ansible Tower automation, removing a large slice of repetitive configuration work.</li>
+            <li>Designed a Datadog alerting layer with custom checks that surfaced performance bottlenecks proactively.</li>
+          </ul>
+          <p class="chips"><span>AWS EC2</span><span>RDS</span><span>Terraform</span><span>Ansible Tower</span><span>Datadog</span><span>OpenText</span><span>PowerShell</span></p>
+        </article>
+
+        <article class="engagement">
+          <header>
+            <div>
+              <h3>Knab <span class="sector">· online bank, Amsterdam</span></h3>
+              <p class="role">Senior Cloud Engineer · freelance</p>
+            </div>
+            <p class="period">Nov 2020 — Aug 2022</p>
+          </header>
+          <ul>
+            <li>Built security gates into the Azure DevOps pipelines — SonarCloud (SAST), OWASP ZAP proxy (DAST) and Trivy (container and dependency scanning) — blocking any deployment when an issue was found.</li>
+            <li>Designed and built an automated release mechanism with auto-generated change tickets, taking deployment frequency from weekly to daily in a regulated environment.</li>
+            <li>Migrated legacy infrastructure to an Infrastructure-as-Code model with Terraform and PowerShell, making environments consistent and reproducible.</li>
+          </ul>
+          <p class="chips"><span>Azure DevOps</span><span>AWS</span><span>Terraform</span><span>Docker</span><span>Splunk</span><span>SonarCloud</span><span>Trivy</span><span>OWASP ZAP</span></p>
+        </article>
+
+        <article class="engagement">
+          <header>
+            <div>
+              <h3>3D Hubs <span class="sector">· manufacturing marketplace, Amsterdam</span></h3>
+              <p class="role">Senior DevOps Engineer</p>
+            </div>
+            <p class="period">Oct 2019 — Nov 2020</p>
+          </header>
+          <ul>
+            <li>Broke a monolithic infrastructure into isolated, reproducible environments on AWS with Terraform.</li>
+            <li>Moved CI/CD off a hosted service onto self-hosted Jenkins managed by Puppet, lowering build costs and restoring control over the pipeline.</li>
+            <li>Wrote a custom GitHub Action bot in TypeScript that automated the deployment workflow end to end.</li>
+          </ul>
+          <p class="chips"><span>AWS ECS</span><span>EC2</span><span>S3</span><span>Terraform</span><span>Jenkins</span><span>Puppet</span><span>Prometheus</span><span>ELK</span><span>TypeScript</span></p>
+        </article>
+
+        <article class="engagement">
+          <header>
+            <div>
+              <h3>Patchman <span class="sector">· security SaaS, Enschede</span></h3>
+              <p class="role">Senior DevOps Engineer</p>
+            </div>
+            <p class="period">Jun 2018 — Sep 2019</p>
+          </header>
+          <ul>
+            <li>Orchestrated the entire VM estate on Linode with Puppet, keeping configuration consistent across every node.</li>
+            <li>Scaled Redis, PostgreSQL and Nginx for high availability using Keepalived and HAProxy.</li>
+            <li>Built a Docker-based development environment mirroring production, standardising testing and reducing deployment failures.</li>
+          </ul>
+          <p class="chips"><span>Linode</span><span>Puppet</span><span>PostgreSQL</span><span>Redis</span><span>HAProxy</span><span>Keepalived</span><span>Docker</span></p>
+        </article>
+
+        <article class="engagement engagement-compact">
+          <header>
+            <div>
+              <h3>Earlier <span class="sector">· Cisco, Alcatel-Lucent, Nokia</span></h3>
+              <p class="role">Automation, telecom data &amp; network engineering</p>
+            </div>
+            <p class="period">2002 — 2018</p>
+          </header>
+          <ul>
+            <li><strong>Senior DevOps Engineer, 3Pillar Global (Cisco), 2017–2018</strong> — Python automation for Cisco FirePower NGFW.</li>
+            <li><strong>Data Warehouse Analyst, Alcatel-Lucent / Nokia, 2014–2017</strong> — Python, PHP and VMware automation for telecom KPIs; MSSQL optimisation.</li>
+            <li><strong>Network Analyst, Alcatel-Lucent, 2013–2014</strong> — 4G/LTE rollout and network monitoring.</li>
+            <li><strong>System Administrator, freelance, 2002–2013</strong> — Linux security, malware removal and server hardening.</li>
+          </ul>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────────────── Stack ──────────────────────── -->
+  <section id="stack" class="section section-alt">
+    <div class="wrap">
+      <p class="eyebrow">Stack</p>
+      <h2 class="section-title">Tools I actually run in production</h2>
+      <p class="section-lede">Not a list of everything I have ever opened. This is what I reach for.</p>
+
+      <div class="grid grid-4 stack-grid">
+        <div class="stack-col">
+          <h3>Cloud &amp; infrastructure</h3>
+          <ul><li>AWS</li><li>Terraform</li><li>Terragrunt</li><li>Docker</li><li>Kubernetes</li><li>KVM</li><li>VMware</li></ul>
+        </div>
+        <div class="stack-col">
+          <h3>Automation</h3>
+          <ul><li>Python</li><li>Bash</li><li>PowerShell</li><li>Ansible</li><li>Puppet</li><li>GitHub Actions</li><li>Azure DevOps</li><li>Jenkins</li><li>RenovateBot</li><li>Backstage</li></ul>
+        </div>
+        <div class="stack-col">
+          <h3>AI &amp; LLMs</h3>
+          <ul><li>Amazon Bedrock</li><li>LangChain</li><li>Claude</li><li>LLM cost monitoring</li></ul>
+        </div>
+        <div class="stack-col">
+          <h3>Observability &amp; security</h3>
+          <ul><li>New Relic</li><li>Datadog</li><li>Splunk</li><li>Prometheus</li><li>Grafana</li><li>OpsLevel</li><li>SonarCloud</li><li>Trivy</li><li>OWASP ZAP</li></ul>
+        </div>
+        <div class="stack-col">
+          <h3>Networking</h3>
+          <ul><li>Cisco</li><li>MPLS</li><li>pfSense</li><li>WireGuard</li><li>OpenVPN</li><li>HAProxy</li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────────────── About ──────────────────────── -->
+  <section id="about" class="section">
+    <div class="wrap about-inner">
+      <div class="about-copy">
+        <p class="eyebrow">About</p>
+        <h2 class="section-title">Codeverse is one engineer, on purpose</h2>
+        <p>
+          I'm Mihai Cindea. I started breaking and fixing computers in the early 2000s and got addicted to
+          Linux almost immediately — to the point of building a Slackware-based security distribution with
+          a few friends. Security has stayed the lens I look at infrastructure through ever since.
+        </p>
+        <p>
+          Since then the work has moved from remote sysadmin to telecom, and from telecom to cloud and
+          DevOps — but the job has never really changed: understand the system, remove the manual steps,
+          and make sure the thing still stands up when it's under load and someone is asking for evidence.
+        </p>
+        <p>
+          Codeverse is deliberately small. You get the engineer who does the work, not an account manager
+          and a rotating bench.
+        </p>
+        <p class="about-langs"><strong>Working language:</strong> English.</p>
+      </div>
+
+      <aside class="creds">
+        <h3>Credentials</h3>
+        <ul>
+          <li>
+            <span class="cred-title">BSc Computer Science</span>
+            <span class="cred-sub">Universitatea din Oradea, Romania</span>
+          </li>
+          <li>
+            <span class="cred-title">Cisco Security Green Belt</span>
+            <span class="cred-sub">Cisco Systems</span>
+          </li>
+          <li>
+            <span class="cred-title">CCNA — Routing &amp; Switching</span>
+            <span class="cred-sub">Cisco Systems</span>
+          </li>
+          <li>
+            <span class="cred-title">Certified Field Expert</span>
+            <span class="cred-sub">Alcatel-Lucent — MPLS &amp; 7750 SR</span>
+          </li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ─────────────────────── Coverage ─────────────────────── -->
+  <section id="coverage" class="section section-alt">
+    <div class="wrap">
+      <p class="eyebrow">Coverage</p>
+      <h2 class="section-title">Where I work</h2>
+      <p class="section-lede">
+        Utrecht is home, which puts most of the Randstad within an easy commute. Everything that does not
+        need a desk in your building runs remote — that has been the normal way of working here since 2020.
+      </p>
+
+      <div class="coverage-inner">
+        <div class="coverage-col">
+          <h3>On-site &amp; hybrid</h3>
+          <p>
+            Regular travel for kick-offs, workshops and the weeks where being in the room genuinely helps —
+            across Utrecht, Noord-Holland, Zuid-Holland, Flevoland and Gelderland:
+          </p>
+          <ul class="region-list">
+            <li>Utrecht</li><li>Amsterdam</li><li>Amstelveen</li><li>Hoofddorp &amp; Schiphol</li>
+            <li>Haarlem</li><li>Hilversum &amp; 't Gooi</li><li>Almere</li><li>Amersfoort</li>
+            <li>Nieuwegein</li><li>Zeist</li><li>Rotterdam</li><li>Den Haag</li>
+            <li>Leiden</li><li>Delft</li><li>Apeldoorn</li>
+          </ul>
+        </div>
+
+        <div class="coverage-col">
+          <h3>Fully remote</h3>
+          <p>
+            Remote-first engagements are welcome and well-practised — the LeasePlan work was fully remote,
+            and both Knab engagements ran remote or hybrid. I work in the Central European timezone and
+            overlap comfortably with the UK, the Nordics, Iberia and most of the EU.
+          </p>
+          <p>
+            If your team is distributed, that is not an obstacle to sort out later; it is simply how the
+            work runs. Async-friendly documentation, reviewable infrastructure changes and pipelines that
+            do not need someone watching them are all part of the same habit.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq">
+        <h3 class="faq-title">Common questions</h3>
+
+        <details>
+          <summary>Do you take fully remote contracts?</summary>
+          <div class="faq-body">
+            <p>
+              Yes. Most of the last six years has been remote or hybrid, including a fully remote year and
+              a half running SAP OpenText hosting on AWS for LeasePlan. Fully remote engagements anywhere
+              in the EU are fine, and I am equally happy coming on-site for the parts that need it.
+            </p>
+          </div>
+        </details>
+
+        <details>
+          <summary>Which regions do you cover for on-site work?</summary>
+          <div class="faq-body">
+            <p>
+              The whole Randstad is comfortable from Utrecht — Amsterdam, Amstelveen, Hoofddorp,
+              Schiphol, Haarlem, Hilversum, Almere, Rotterdam, Den Haag, Leiden and Delft — plus
+              Amersfoort and Apeldoorn out east. Further afield in the Netherlands works too,
+              typically as a mix of remote weeks and scheduled on-site days.
+            </p>
+          </div>
+        </details>
+
+        <details>
+          <summary>What kind of work is a good fit?</summary>
+          <div class="faq-body">
+            <p>
+              AWS architecture and migrations, Terraform and Infrastructure as Code, CI/CD and developer
+              experience, container and cloud security hardening, and observability that produces useful
+              alerts. Teams range from scale-ups with one overloaded platform engineer to regulated
+              enterprises that need the audit trail to hold up.
+            </p>
+          </div>
+        </details>
+
+        <details>
+          <summary>Which language do you work in?</summary>
+          <div class="faq-body">
+            <p>
+              English. It is the working language of nearly every engineering team in the Randstad, and it is what engagements run in end to end — standups, documentation, review and handover.
+            </p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ──────────────────────── Contact ─────────────────────── -->
+  <section id="contact" class="section section-contact">
+    <div class="wrap">
+      <div class="contact-card">
+        <p class="eyebrow">Contact</p>
+        <h2 class="section-title">Got infrastructure that needs an adult in the room?</h2>
+        <p class="section-lede">
+          Tell me what's breaking, what's slow, or what the auditor flagged. If I'm not the right person,
+          I'll say so.
+        </p>
+
+        <div class="contact-actions">
+          <!-- The address is assembled at runtime by /assets/js/main.js so it never
+               appears in the served HTML for address-harvesting crawlers. -->
+          <div id="email-slot" class="email-slot"></div>
+          <noscript>
+            <p class="noscript-note">
+              JavaScript is off, so the address is hidden from crawlers here — reach me on
+              <a href="https://www.linkedin.com/in/mihai-c%C3%AEndea-4085a184/" rel="me noopener">LinkedIn</a> instead.
+            </p>
+          </noscript>
+
+          <a class="btn btn-ghost" href="https://www.linkedin.com/in/mihai-c%C3%AEndea-4085a184/" rel="me noopener">LinkedIn</a>
+          <a class="btn btn-ghost" href="https://github.com/kiwimato" rel="me noopener">GitHub</a>
+        </div>
+
+        <p class="contact-meta">
+          Based in Utrecht · available remote or on-site in the Netherlands · engagements run in English
+        </p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <p class="footer-brand">
+      <span class="brand-text">Codeverse</span>
+      <span class="footer-tag">Cloud &amp; DevOps engineering · Utrecht, NL</span>
+    </p>
+    <p class="footer-links">
+      Open source: <a href="https://dvrbridge.codeverse.nl/">dvrbridge — RTSP for old CCTV DVRs</a>
+      · <a href="https://github.com/kiwimato" rel="me noopener">GitHub</a>
+    </p>
+
+    <!-- Dutch business details. Uncomment and fill in once you have them to hand —
+         KVK and BTW numbers are expected on a NL business site and help with B2B trust.
+    <p class="footer-legal">
+      KVK 00000000 · BTW NL000000000B00
+    </p>
+    -->
+
+    <p class="footer-copy">&copy; <span id="year">2026</span> Codeverse — Mihai Cindea. All rights reserved.</p>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "ProfessionalService",
+        "Organization"
+      ],
+      "@id": "https://codeverse.nl/#business",
+      "name": "Codeverse",
+      "alternateName": "Codeverse — Mihai Cindea",
+      "url": "https://codeverse.nl/",
+      "image": "https://codeverse.nl/assets/img/og.png",
+      "logo": "https://codeverse.nl/favicon.svg",
+      "description": "Independent freelance cloud and DevOps consultancy: AWS architecture, Terraform, CI/CD and security hardening. On-site in Utrecht, Amsterdam, Noord-Holland and the Randstad, or fully remote across the EU.",
+      "slogan": "Cloud infrastructure that holds up in production — and under audit.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Utrecht",
+        "addressRegion": "Utrecht",
+        "addressCountry": "NL"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 52.0907,
+        "longitude": 5.1214
+      },
+      "founder": {
+        "@id": "https://codeverse.nl/#mihai"
+      },
+      "employee": {
+        "@id": "https://codeverse.nl/#mihai"
+      },
+      "knowsLanguage": [
+        "en"
+      ],
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Utrecht"
+        },
+        {
+          "@type": "City",
+          "name": "Amsterdam"
+        },
+        {
+          "@type": "City",
+          "name": "Rotterdam"
+        },
+        {
+          "@type": "City",
+          "name": "Den Haag"
+        },
+        {
+          "@type": "City",
+          "name": "Amersfoort"
+        },
+        {
+          "@type": "City",
+          "name": "Haarlem"
+        },
+        {
+          "@type": "City",
+          "name": "Hilversum"
+        },
+        {
+          "@type": "City",
+          "name": "Almere"
+        },
+        {
+          "@type": "City",
+          "name": "Hoofddorp"
+        },
+        {
+          "@type": "City",
+          "name": "Leiden"
+        },
+        {
+          "@type": "City",
+          "name": "Delft"
+        },
+        {
+          "@type": "City",
+          "name": "Apeldoorn"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Noord-Holland"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Zuid-Holland"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Utrecht (province)"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Flevoland"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Gelderland"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Randstad"
+        },
+        {
+          "@type": "Country",
+          "name": "Netherlands"
+        },
+        {
+          "@type": "Place",
+          "name": "European Union (remote)"
+        }
+      ],
+      "serviceType": [
+        "Freelance DevOps engineer",
+        "Freelance cloud engineer",
+        "AWS consultant",
+        "Terraform consultant",
+        "Infrastructure as Code consultant",
+        "CI/CD consultant",
+        "Cloud security consultant",
+        "Interim cloud engineer",
+        "Remote DevOps contractor"
+      ],
+      "knowsAbout": [
+        "AWS",
+        "Amazon Web Services",
+        "Terraform",
+        "Terragrunt",
+        "Infrastructure as Code",
+        "CI/CD",
+        "Azure DevOps",
+        "GitHub Actions",
+        "Jenkins",
+        "Kubernetes",
+        "Docker",
+        "Cloud security",
+        "AWS WAF",
+        "CloudFront",
+        "Observability",
+        "Datadog",
+        "New Relic",
+        "Prometheus",
+        "Grafana",
+        "Ansible",
+        "Puppet",
+        "Python",
+        "Linux",
+        "Networking",
+        "MPLS",
+        "WireGuard",
+        "Backstage",
+        "Large language models",
+        "Amazon Bedrock",
+        "LangChain",
+        "Claude"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Cloud and DevOps services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Cloud architecture & AWS migration",
+              "description": "AWS architecture, multi-account design and staged migration of legacy infrastructure to the cloud."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Infrastructure as Code with Terraform",
+              "description": "Terraform modules, state strategy and Ansible or Puppet configuration management."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "CI/CD and developer experience",
+              "description": "Pipeline design and optimisation in Azure DevOps, GitHub Actions and Jenkins, with automated dependency and compliance workflows."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Cloud security and compliance hardening",
+              "description": "AWS WAF, CloudFront and Shield edge protection, distroless containers, and SonarCloud, Trivy and OWASP ZAP scanning shifted left into the build."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Observability and monitoring",
+              "description": "New Relic, Datadog, Prometheus, Grafana and Splunk instrumentation with alerting that reflects real failure."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Network engineering and connectivity",
+              "description": "Hybrid connectivity, segmentation, MPLS, and VPN estates on pfSense, WireGuard or OpenVPN."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://codeverse.nl/#mihai",
+      "name": "Mihai Cindea",
+      "jobTitle": "Senior Cloud & DevOps Engineer",
+      "description": "Freelance senior cloud and DevOps engineer with over 20 years of experience in AWS, Terraform, CI/CD and infrastructure security.",
+      "url": "https://codeverse.nl/",
+      "worksFor": {
+        "@id": "https://codeverse.nl/#business"
+      },
+      "homeLocation": {
+        "@type": "Place",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Utrecht",
+          "addressCountry": "NL"
+        }
+      },
+      "knowsLanguage": [
+        "English"
+      ],
+      "alumniOf": {
+        "@type": "CollegeOrUniversity",
+        "name": "Universitatea din Oradea"
+      },
+      "hasCredential": [
+        {
+          "@type": "EducationalOccupationalCredential",
+          "name": "BSc Computer Science",
+          "credentialCategory": "degree"
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          "name": "Cisco Security Green Belt",
+          "credentialCategory": "certificate"
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          "name": "CCNA Routing & Switching",
+          "credentialCategory": "certificate"
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          "name": "Alcatel-Lucent Certified Field Expert (MPLS & 7750 SR)",
+          "credentialCategory": "certificate"
+        }
+      ],
+      "sameAs": [
+        "https://www.linkedin.com/in/mihai-c%C3%AEndea-4085a184/",
+        "https://github.com/kiwimato"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://codeverse.nl/#website",
+      "url": "https://codeverse.nl/",
+      "name": "Codeverse",
+      "inLanguage": "en-GB",
+      "publisher": {
+        "@id": "https://codeverse.nl/#business"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://codeverse.nl/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Do you take fully remote contracts?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Most of the last six years has been remote or hybrid, including a fully remote year and a half running SAP OpenText hosting on AWS for LeasePlan. Fully remote engagements anywhere in the EU are fine, and I am equally happy coming on-site for the parts that need it."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which regions do you cover for on-site work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The whole Randstad is comfortable from Utrecht — Amsterdam, Amstelveen, Hoofddorp, Schiphol, Haarlem, Hilversum, Almere, Rotterdam, Den Haag, Leiden and Delft — plus Amersfoort and Apeldoorn out east. Further afield in the Netherlands works too, typically as a mix of remote weeks and scheduled on-site days."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What kind of work is a good fit?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "AWS architecture and migrations, Terraform and Infrastructure as Code, CI/CD and developer experience, container and cloud security hardening, and observability that produces useful alerts. Teams range from scale-ups with one overloaded platform engineer to regulated enterprises that need the audit trail to hold up."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which language do you work in?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "English. It is the working language of nearly every engineering team in the Randstad, and it is what engagements run in end to end — standups, documentation, review and handover."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<script src="/assets/js/main.js" defer></script>
+</body>
+</html>

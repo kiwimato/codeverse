@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Codeverse OG card</title>
+<!--
+  Source for site/assets/img/og.png (the social-preview card).
+  This file is NOT deployed — it lives outside site/ on purpose.
+
+  Regenerate after editing:
+    python3 -m http.server 8732 --directory . &
+    firefox --headless --screenshot "$PWD/site/assets/img/og.png" \
+            --window-size=1200,630 http://127.0.0.1:8732/tools/og-image.html
+-->
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; }
+  body {
+    background: #07202b;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: #e8eef4;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 0 88px; position: relative;
+  }
+  body::before {
+    content: ""; position: absolute; inset: -30% -20% auto 35%; height: 150%;
+    background: radial-gradient(45% 45% at 50% 50%, rgba(47,191,176,.30), transparent 70%);
+  }
+  body::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 8px;
+    background: linear-gradient(90deg, #0d7d74, #2fbfb0 55%, #07202b);
+  }
+  .watermark { position: absolute; right: -70px; top: 50%; transform: translateY(-50%); z-index: 0; }
+  .inner { position: relative; z-index: 1; }
+  .brand { display: flex; align-items: center; gap: 16px; margin-bottom: 46px; }
+  .brand svg { color: #2fbfb0; }
+  .brand span { font-size: 34px; font-weight: 700; letter-spacing: -.02em; }
+  h1 {
+    font-size: 56px; line-height: 1.1; letter-spacing: -.035em; font-weight: 700;
+    max-width: 14ch;
+  }
+  h1 em { font-style: normal; color: #2fbfb0; }
+  p.sub { margin-top: 28px; font-size: 25px; color: #a3b4c4; letter-spacing: -.01em; }
+  .foot {
+    position: absolute; left: 88px; right: 88px; bottom: 54px; z-index: 1;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 21px; color: #7f93a5;
+  }
+  .foot b { color: #e8eef4; font-weight: 600; }
+</style></head>
+<body>
+  <svg class="watermark" width="520" height="520" viewBox="0 0 32 32" aria-hidden="true">
+    <path d="M16 2.6 28 9.3v13.4L16 29.4 4 22.7V9.3z" fill="none" stroke="#2fbfb0" stroke-opacity=".13" stroke-width="1.1" stroke-linejoin="round"/>
+    <path d="M20.6 12.2a5.8 5.8 0 1 0 0 7.6" fill="none" stroke="#2fbfb0" stroke-opacity=".13" stroke-width="1.5" stroke-linecap="round"/>
+  </svg>
+  <div class="inner">
+    <div class="brand">
+      <svg width="46" height="46" viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M16 2.6 28 9.3v13.4L16 29.4 4 22.7V9.3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M20.6 12.2a5.8 5.8 0 1 0 0 7.6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+      </svg>
+      <span>Codeverse</span>
+    </div>
+    <h1>Cloud infrastructure that holds up <em>in production.</em></h1>
+    <p class="sub">AWS · Terraform · CI/CD · Security hardening</p>
+  </div>
+  <div class="foot">
+    <span><b>Mihai Cindea</b> — freelance cloud &amp; DevOps engineer</span>
+    <span>Utrecht, NL · remote across the EU</span>
+  </div>
+</body></html>

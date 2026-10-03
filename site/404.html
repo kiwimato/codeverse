@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page not found — Codeverse</title>
+<meta name="description" content="That page does not exist on codeverse.nl.">
+<!-- Keep this out of the index: a 404 body has nothing worth ranking, and without
+     this file Cloudflare Pages falls back to index.html and answers 200 for every
+     bad URL — a soft-404 that lets crawlers index junk paths as homepage copies. -->
+<meta name="robots" content="noindex, follow">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="/favicon.ico">
+<link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/" aria-label="Codeverse home">
+      <svg class="brand-mark" width="28" height="28" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+        <path d="M16 2.6 28 9.3v13.4L16 29.4 4 22.7V9.3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M20.6 12.2a5.8 5.8 0 1 0 0 7.6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+      </svg>
+      <span class="brand-text">Codeverse</span>
+    </a>
+  </div>
+</header>
+
+<main class="error-page">
+  <div class="wrap">
+    <p class="error-code">404</p>
+    <h1>That page does not exist</h1>
+    <p class="lede">
+      Nothing is on fire — the URL is just wrong, or something moved. The front page has
+      everything on it.
+    </p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="/">Back to the front page</a>
+      <a class="btn btn-ghost" href="/#contact">Get in touch</a>
+    </div>
+
+    <nav class="error-links" aria-label="Services">
+      <h2>Or jump straight to a service</h2>
+      <ul>
+        <li><a href="/aws-cloud-consultant/">AWS architecture &amp; migration</a></li>
+        <li><a href="/terraform-consultant/">Infrastructure as Code</a></li>
+        <li><a href="/cicd-devops-engineer/">CI/CD &amp; developer experience</a></li>
+        <li><a href="/cloud-security-hardening/">Security hardening</a></li>
+        <li><a href="/observability-monitoring/">Observability</a></li>
+        <li><a href="/network-engineering/">Networking</a></li>
+      </ul>
+    </nav>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <p class="footer-brand">
+      <span class="brand-text">Codeverse</span>
+      <span class="footer-tag">Cloud &amp; DevOps engineering · Utrecht, NL</span>
+    </p>
+    <p class="footer-copy">&copy; <span id="year">2026</span> Codeverse — Mihai Cindea. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="/assets/js/main.js" defer></script>
+</body>
+</html>

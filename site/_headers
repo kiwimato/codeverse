@@ -1,0 +1,22 @@
+# Cloudflare Pages headers — https://developers.cloudflare.com/pages/configuration/headers/
+#
+# Every page carries one inline <script type="application/ld+json">. Each is
+# allow-listed below by SHA-256 so script-src stays strict — no 'unsafe-inline'.
+# The hashes are derived from the page bodies, so after editing any JSON-LD
+# (or re-running tools/build-service-pages.py) refresh them with:
+#
+#   python3 tools/refresh-csp.py
+
+/*
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-1/7wHHLoHk1iWwBSIbdIRFw5tWs84k6WyGarBJ3OCTo=' 'sha256-D0/Gm7MQewbRJrSxnbojQlfZmqqqwkja/tsKRsntMsY=' 'sha256-Px3pCA7EbXYbIP3xLbnxRqqlxoMnJoH/dJh7cdh/RRw=' 'sha256-a/TUjRAizMMu2ehDrBPlQMBtAdBCswHOLFPnB1ucSGA=' 'sha256-fkYp28+IvAbNBsQu9N0N/Tq/UVwGXVdEZwrLtqMvRt4=' 'sha256-mPxGp30QjmarJPiSGD+fIhefYaCY3OY140xD/wXSYXM=' 'sha256-qJt6Gdakg2/xA6a3XRSBLyW+QxhdzrV7vQaMasPWOZ0='; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; form-action 'none'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), interest-cohort=()
+  Cross-Origin-Opener-Policy: same-origin
+
+/assets/*
+  Cache-Control: public, max-age=3600
+
+/index.html
+  Cache-Control: public, max-age=0, must-revalidate
