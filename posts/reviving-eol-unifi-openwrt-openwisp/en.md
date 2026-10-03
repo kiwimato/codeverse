@@ -3,14 +3,8 @@ title: Reviving three end-of-life UniFi access points with OpenWrt and OpenWISP
 description: Three first-gen UniFi APs, last patched in 2021, now run OpenWrt 25.12 under a self-hosted OpenWISP: central config, monitoring, roaming, no licence.
 date: 2026-10-03
 tags: homelab, opensource
-draft: true
+image: unifi-ap-gen1.jpg
 ---
-
-<!--
-  TODO before publishing:
-  - a screenshot of the OpenWISP dashboard with the three APs listed and monitoring data
-  - optionally a photo of the three UniFi APs / the one being flashed over serial
--->
 
 The house in Romania runs on three first-generation UniFi access points: a UAP, a
 UAP-Pro and a UAP-Outdoor+. The hardware is fine, but Ubiquiti stopped at firmware
@@ -18,6 +12,8 @@ UAP-Pro and a UAP-Outdoor+. The hardware is fine, but Ubiquiti stopped at firmwa
 controller that still adopts them is 6.0.45, which is itself years old. That leaves the
 usual choice for old gear that still works: landfill, or a current operating system. I
 flashed all three to OpenWrt 25.12 and put them under one self-hosted OpenWISP.
+
+![A round white first-generation UniFi AP next to its retail box, PoE adapter and power cable](unifi-ap-gen1.jpg "A first-generation UniFi AP, the same model as the plain UAP here. Not my unit: photo by [L3u](https://commons.wikimedia.org/wiki/File:Ubiquiti_Unifi_AP.jpg), CC0, via Wikimedia Commons.")
 
 ## The three access points
 
@@ -110,6 +106,8 @@ OpenWrt on its own would mean SSHing into three APs one at a time.
 [OpenWISP](https://openwisp.org) is the other half: a self-hosted controller, running in
 Docker on the house server, that manages them as a fleet.
 
+![The OpenWISP device list showing UAP-942c, UAP-Outdoor-d220 and UAP-Pro-10a6, all on the OpenWrt backend with health OK and configuration applied](openwisp-devices.png "All three APs in OpenWISP: health OK, configuration applied. MAC addresses blurred.")
+
 - It gives one dashboard for three different models. The old UniFi controller only ever
   spoke to UniFi hardware and was itself frozen at a 2021 release. OpenWISP does not care
   what the device is, only that it runs the agent.
@@ -132,6 +130,8 @@ and IP was not there. I added it with a small DHCP/ARP snooper on the APs and a 
 of fields on the server, and pushed it as branches against the relevant
 [upstream issue](https://github.com/openwisp/openwisp-monitoring/issues/629). With a
 sealed appliance I would have filed a request and waited.
+
+![OpenWISP WiFi sessions list with hostname, IP address and vendor columns filled in for clients on UAP-942c and UAP-Pro-10a6](openwisp-wifi-sessions.png "WiFi sessions with hostnames and IP addresses, which come from the snooper. The inverter (SUN2000) moved from UAP-942c to the Pro on 3 October. MAC addresses blurred.")
 
 ## What I would tell myself at the start
 

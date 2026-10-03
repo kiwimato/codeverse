@@ -21,7 +21,7 @@ The CV (`RESUME.md`, its PDF build) is **not** here. It lives in the private
   Site copy about Mihai's work must trace back to what he said or to the CV. Unknown
   facts get a `<!-- TODO -->` / `<!-- CONFIRM -->` comment, not a plausible guess.
 * **Working language: English only.** Do not claim Dutch or Romanian as working
-  languages. The blog being bilingual is content, not a language claim.
+  languages. The blog being in English, Dutch and Romanian is content, not a language claim.
 * **Never publish `assets/images/profile.jpg` from the old CV** — it is the Pillar
   theme's stock photo of a stranger. There is no real portrait yet.
 * **Do not commit, push, deploy or `terraform apply` unasked.**

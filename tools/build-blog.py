@@ -11,11 +11,12 @@ Source layout (posts/ is never deployed):
 
     posts/<slug>/en.md        English version   -> https://blog.codeverse.nl/<slug>/
     posts/<slug>/nl.md        Dutch version     -> https://blog.codeverse.nl/nl/<slug>/
+    posts/<slug>/ro.md        Romanian version  -> https://blog.codeverse.nl/ro/<slug>/
     posts/<slug>/*.jpg|png    images, shared by both languages, copied to blog/<slug>/
 
-A post may exist in one language only. When both exist, the two pages link to
-each other and carry hreflang alternates; when one is missing, the switcher on
-the other page says so instead of linking to a 404.
+A post may exist in any subset of LANGS. The versions that exist link to each
+other and carry hreflang alternates; a missing language shows as a disabled
+entry in the header's language menu instead of linking to a 404.
 
 Front matter is plain `key: value` lines between two `---` lines:
 
@@ -63,17 +64,17 @@ AUTHOR = 'Mihai Cindea'
 INDEXNOW_KEY = '733f7cbf4bbb2b3b8886cabbd6b23b0b'   # same key as codeverse.nl and dvrbridge; served at /<key>.txt
 TZ = zoneinfo.ZoneInfo('Europe/Amsterdam')
 
-LANGS = ['en', 'nl']                       # first one is the default (x-default, root URL)
+LANGS = ['en', 'nl', 'ro']                 # first one is the default (x-default, root URL)
 
 # Tag slug -> display name per language. A tag not listed here is shown as-is.
 # 'repair' is the "Repair corner" — bakfiets, tools, things around the house.
 TAGS = {
-    'repair':     {'en': 'Repair corner',   'nl': 'Reparatiehoek'},
-    'opensource': {'en': 'Open source',     'nl': 'Open source'},
-    'bakfiets':   {'en': 'Bakfiets',        'nl': 'Bakfiets'},
-    'cloud':      {'en': 'Cloud & DevOps',  'nl': 'Cloud & DevOps'},
-    'homelab':    {'en': 'Homelab',         'nl': 'Homelab'},
-    'notes':      {'en': 'Notes',           'nl': 'Notities'},
+    'repair':     {'en': 'Repair corner',   'nl': 'Reparatiehoek', 'ro': 'Colțul de reparații'},
+    'opensource': {'en': 'Open source',     'nl': 'Open source', 'ro': 'Open source'},
+    'bakfiets':   {'en': 'Bakfiets',        'nl': 'Bakfiets', 'ro': 'Bakfiets'},
+    'cloud':      {'en': 'Cloud & DevOps',  'nl': 'Cloud & DevOps', 'ro': 'Cloud & DevOps'},
+    'homelab':    {'en': 'Homelab',         'nl': 'Homelab', 'ro': 'Homelab'},
+    'notes':      {'en': 'Notes',           'nl': 'Notities', 'ro': 'Notițe'},
 }
 
 # Optional blurb for a tag page: becomes both its lede and its meta description.
@@ -84,6 +85,8 @@ TAG_INTRO = {
               'hardware that would not behave or a machine that needed persuading. All on GitHub.',
         'nl': 'Kleine opensourcetools, elk geschreven voor één specifiek probleem, zoals '
               'hardware die niet wilde meewerken of een machine die wat overtuiging nodig had. Alles staat op GitHub.',
+        'ro': 'Unelte open source mici, fiecare scrisă pentru o singură problemă anume, cum ar fi '
+              'hardware care nu voia să coopereze sau o mașină care avea nevoie de puțină convingere. Toate sunt pe GitHub.',
     },
 }
 
@@ -97,10 +100,11 @@ UI = {
         tagline='Repairs, infrastructure and other things worth writing down.',
         index_title='Codeverse blog — repairs, infrastructure and notes',
         index_desc='Notes by Mihai Cindea: bakfiets and household repairs, cloud and DevOps '
-                   'engineering, and whatever else was worth writing down. In English and Dutch.',
+                   'engineering, and whatever else was worth writing down. In English, Dutch and Romanian.',
         nav_blog='All posts', nav_repair='Repair corner', nav_opensource='Open source',
         nav_main='codeverse.nl',
-        nav_hire='Work with me', switch_label='Nederlands', switch_missing='Not available in Dutch',
+        nav_hire='Work with me', lang_menu='Language', not_available='Not available in this language',
+        also_in='Also available in',
         by='By', published='Published', updated='Updated', read='min read',
         tagged='Filed under', posts_tagged='Posts filed under', all_posts='All posts',
         empty='Nothing published yet. The first post is on its way.',
@@ -119,10 +123,11 @@ UI = {
         tagline='Reparaties, infrastructuur en andere dingen die het opschrijven waard zijn.',
         index_title='Codeverse blog — reparaties, infrastructuur en notities',
         index_desc='Notities van Mihai Cindea: bakfiets- en huishoudelijke reparaties, cloud- en '
-                   'DevOps-engineering, en wat verder het opschrijven waard was. In het Nederlands en Engels.',
+                   'DevOps-engineering, en wat verder het opschrijven waard was. In het Nederlands, Engels en Roemeens.',
         nav_blog='Alle berichten', nav_repair='Reparatiehoek', nav_opensource='Open source',
         nav_main='codeverse.nl',
-        nav_hire='Samenwerken', switch_label='English', switch_missing='Niet beschikbaar in het Engels',
+        nav_hire='Samenwerken', lang_menu='Taal', not_available='Niet beschikbaar in deze taal',
+        also_in='Ook beschikbaar in',
         by='Door', published='Gepubliceerd', updated='Bijgewerkt', read='min lezen',
         tagged='Onderwerp', posts_tagged='Berichten over', all_posts='Alle berichten',
         empty='Nog niets gepubliceerd. Het eerste bericht komt eraan.',
@@ -136,6 +141,29 @@ UI = {
         skip='Naar de inhoud', menu_open='Menu openen', crumbs='Kruimelpad', footer_tag='Notities uit Utrecht, NL',
         lang_name='Nederlands', locale='nl_NL', html_lang='nl',
     ),
+    'ro': dict(
+        site_name='Codeverse blog',
+        tagline='Reparații, infrastructură și alte lucruri care merită notate.',
+        index_title='Codeverse blog — reparații, infrastructură și notițe',
+        index_desc='Notițele lui Mihai Cindea: reparații la bakfiets și prin casă, inginerie cloud '
+                   'și DevOps, și orice altceva a meritat scris. În engleză, olandeză și română.',
+        nav_blog='Toate articolele', nav_repair='Colțul de reparații', nav_opensource='Open source',
+        nav_main='codeverse.nl',
+        nav_hire='Colaborare', lang_menu='Limbă', not_available='Indisponibil în această limbă',
+        also_in='Disponibil și în',
+        by='De', published='Publicat', updated='Actualizat', read='min de citit',
+        tagged='Categorie', posts_tagged='Articole despre', all_posts='Toate articolele',
+        empty='Încă nu am publicat nimic. Primul articol vine curând.',
+        latest='Cele mai noi articole', tags_h='După subiect', feed='Flux RSS',
+        back='Înapoi la toate articolele', about_h='Despre autor',
+        about=('Mihai Cindea este inginer freelance de cloud și DevOps în Utrecht. Ziua lucrează '
+               'cu AWS, Terraform și CI/CD. Blogul e despre asta și despre orice altceva a fost '
+               'desfăcut și pus la loc.'),
+        crumb_home='Blog', not_found='Pagina nu a fost găsită',
+        not_found_lede='Pagina asta nu există aici. Poate a fost mutată, sau adresa a fost scrisă greșit.',
+        skip='Sari la conținut', menu_open='Deschide meniul', crumbs='Navigare', footer_tag='Notițe din Utrecht, NL',
+        lang_name='Română', locale='ro_RO', html_lang='ro',
+    ),
 }
 
 MONTHS = {
@@ -143,6 +171,8 @@ MONTHS = {
            'September', 'October', 'November', 'December'],
     'nl': ['januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus',
            'september', 'oktober', 'november', 'december'],
+    'ro': ['ianuarie', 'februarie', 'martie', 'aprilie', 'mai', 'iunie', 'iulie', 'august',
+           'septembrie', 'octombrie', 'noiembrie', 'decembrie'],
 }
 
 E = html.escape
@@ -201,7 +231,7 @@ class Post:
         self.html = md_to_html(body_md, f'/{slug}/')
         words = len(re.findall(r'\w+', re.sub(r'```.*?```', '', body_md, flags=re.S)))
         self.minutes = max(1, round(words / 200))
-        self.sibling = None  # the same post in the other language, filled in later
+        self.translations = {}  # lang -> the same post in each other language, filled in later
 
     @property
     def path(self):
@@ -252,9 +282,8 @@ def load_posts(include_drafts):
             if p.draft and not include_drafts:
                 continue
             by_lang[lang] = p
-        if len(by_lang) == 2:
-            a, b = by_lang[LANGS[0]], by_lang[LANGS[1]]
-            a.sibling, b.sibling = b, a
+        for p in by_lang.values():
+            p.translations = {l: q for l, q in by_lang.items() if l != p.lang}
         posts.extend(by_lang.values())
     posts.sort(key=lambda p: (p.date, p.slug), reverse=True)
     return posts
@@ -312,15 +341,20 @@ def head(lang, title, desc, path, *, alternates, og_type='website', image=None,
 '''
 
 
-def header(lang, switch):
-    """`switch` is (label, href) for the language switcher, or (label, None) when
-    the page has no counterpart in the other language."""
+def header(lang, alternates):
+    """`alternates` maps lang -> path of this page in that language. Languages the
+    page does not exist in are shown disabled rather than linked to a 404."""
     ui = UI[lang]
-    label, href = switch
-    if href:
-        sw = f'<a class="lang-switch" href="{href}" hreflang="{"nl" if lang == "en" else "en"}" lang="{"nl" if lang == "en" else "en"}">{E(label)}</a>'
-    else:
-        sw = f'<span class="lang-switch is-disabled" title="{E(label)}">{"NL" if lang == "en" else "EN"}</span>'
+    items = []
+    for l in LANGS:
+        code = l.upper()
+        if l == lang:
+            items.append(f'<span class="lang-switch is-current" aria-current="true" title="{E(UI[l]["lang_name"])}">{code}</span>')
+        elif l in alternates:
+            items.append(f'<a class="lang-switch" href="{alternates[l]}" hreflang="{l}" lang="{l}" title="{E(UI[l]["lang_name"])}">{code}</a>')
+        else:
+            items.append(f'<span class="lang-switch is-disabled" title="{E(ui["not_available"])}">{code}</span>')
+    sw = f'<span class="lang-menu" role="group" aria-label="{E(ui["lang_menu"])}">{"".join(items)}</span>'
     nav_tags = ''.join(
         f'      <a href="{tag_path(lang, t)}">{E(ui[f"nav_{t}"])}</a>\n'
         for t in NAV_TAGS if t in HAS_TAG[lang])
@@ -419,8 +453,6 @@ def render_list(lang, posts, all_tags, *, tag=None):
         title, desc, path, h1 = ui['index_title'], ui['index_desc'], index_path(lang), ui['site_name']
         alternates = {l: index_path(l) for l in LANGS}
 
-    other = [l for l in LANGS if l != lang][0]
-    switch = (ui['switch_label'], alternates.get(other))
 
     cards = '\n'.join(post_card(p, lang) for p in posts) if posts else \
         f'      <li class="post-empty">{E(ui["empty"])}</li>'
@@ -451,7 +483,7 @@ def render_list(lang, posts, all_tags, *, tag=None):
     }
 
     return (head(lang, title, desc, path, alternates=alternates)
-            + header(lang, switch)
+            + header(lang, alternates)
             + f'''
   <section class="section page-head blog-head">
     <div class="wrap">
@@ -480,22 +512,18 @@ def render_list(lang, posts, all_tags, *, tag=None):
 
 def render_post(p):
     lang, ui = p.lang, UI[p.lang]
-    other = [l for l in LANGS if l != lang][0]
-    alternates = {lang: p.path}
-    if p.sibling:
-        alternates[other] = p.sibling.path
-        switch = (ui['switch_label'], p.sibling.path)
-    else:
-        switch = (ui['switch_missing'], None)
+    alternates = {lang: p.path, **{l: q.path for l, q in p.translations.items()}}
 
     updated = ''
     if p.updated and p.updated != p.date:
         updated = f' · <span>{ui["updated"]} <time datetime="{p.updated.isoformat()}">{fmt_date(p.updated, lang)}</time></span>'
 
     sibling_note = ''
-    if p.sibling:
-        note = {'en': 'Ook beschikbaar in het Nederlands:', 'nl': 'Also available in English:'}[lang]
-        sibling_note = f'''      <p class="post-alt" lang="{other}"><a href="{p.sibling.path}" hreflang="{other}">{note} {E(p.sibling.title)}</a></p>
+    if p.translations:
+        links = ' · '.join(
+            f'<a href="{q.path}" hreflang="{l}" lang="{l}">{E(UI[l]["lang_name"])}</a>'
+            for l, q in sorted(p.translations.items(), key=lambda kv: LANGS.index(kv[0])))
+        sibling_note = f'''      <p class="post-alt">{E(ui['also_in'])}: {links}</p>
 '''
 
     ld = {
@@ -515,8 +543,10 @@ def render_post(p):
                 {"@type": "ListItem", "position": 2, "name": p.title}]},
         ],
     }
-    if p.sibling:
-        ld['@graph'][0]['workTranslation' if lang == LANGS[0] else 'translationOfWork'] = {"@id": p.sibling.url + '#post'}
+    if lang == LANGS[0] and p.translations:
+        ld['@graph'][0]['workTranslation'] = [{"@id": q.url + '#post'} for q in p.translations.values()]
+    elif LANGS[0] in p.translations:
+        ld['@graph'][0]['translationOfWork'] = {"@id": p.translations[LANGS[0]].url + '#post'}
 
     extra = f'''<meta property="article:published_time" content="{p.date.isoformat()}">
 <meta property="article:modified_time" content="{(p.updated or p.date).isoformat()}">
@@ -525,7 +555,7 @@ def render_post(p):
 
     return (head(lang, f'{p.title} — {ui["site_name"]}', p.description, p.path,
                  alternates=alternates, og_type='article', image=p.image_url, extra=extra)
-            + header(lang, switch)
+            + header(lang, alternates)
             + f'''
   <article class="post">
     <header class="section page-head post-head">
@@ -573,18 +603,16 @@ def render_404():
     ld = {"@context": "https://schema.org", "@type": "WebPage", "name": ui['not_found'], "isPartOf": {"@id": f"{ORIGIN}/#blog"}}
     return (head(lang, f'{ui["not_found"]} — {ui["site_name"]}', ui['not_found_lede'], '/404.html',
                  alternates={}, robots='noindex, follow')
-            + header(lang, (UI[lang]['switch_label'], index_path('nl')))
+            + header(lang, {l: index_path(l) for l in LANGS})
             + f'''
   <section class="section error-page">
     <div class="wrap">
       <p class="error-code" aria-hidden="true">404</p>
       <h1>{E(ui['not_found'])}</h1>
       <p class="lede">{E(ui['not_found_lede'])}</p>
-      <p class="lede" lang="nl">{E(UI['nl']['not_found_lede'])}</p>
-      <div class="hero-actions">
+{''.join(f'      <p class="lede" lang="{l}">{E(UI[l]["not_found_lede"])}</p>' + chr(10) for l in LANGS[1:])}      <div class="hero-actions">
         <a class="btn btn-primary" href="/">{E(ui['all_posts'])}</a>
-        <a class="btn btn-ghost" href="/nl/">{E(UI['nl']['all_posts'])}</a>
-      </div>
+{''.join(f'        <a class="btn btn-ghost" href="{index_path(l)}" lang="{l}">{E(UI[l]["all_posts"])}</a>' + chr(10) for l in LANGS[1:])}      </div>
     </div>
   </section>
 '''
@@ -650,10 +678,8 @@ def render_sitemap(posts, tags_by_lang):
         if p.slug in seen:
             continue
         seen.add(p.slug)
-        group = {p.lang: p.path}
-        if p.sibling:
-            group[p.sibling.lang] = p.sibling.path
-        lastmod = max([(q.updated or q.date) for q in ([p] + ([p.sibling] if p.sibling else []))])
+        group = {p.lang: p.path, **{l: q.path for l, q in p.translations.items()}}
+        lastmod = max((q.updated or q.date) for q in [p, *p.translations.values()])
         blocks.append(entry(group, lastmod=lastmod.isoformat(), prio='0.8'))
     all_tags = sorted({t for l in LANGS for t in tags_by_lang[l]})
     for t in all_tags:
@@ -706,13 +732,10 @@ def render_headers(out):
 /*.webp
   Cache-Control: public, max-age=86400
 
-/feed.xml
+''' + ''.join(f'''{feed_path(l)}
   Content-Type: application/rss+xml; charset=utf-8
   Cache-Control: public, max-age=3600
-/nl/feed.xml
-  Content-Type: application/rss+xml; charset=utf-8
-  Cache-Control: public, max-age=3600
-'''
+''' for l in LANGS)
 
 
 # ----------------------------------------------------------------------------

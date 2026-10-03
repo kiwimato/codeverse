@@ -5,16 +5,23 @@
 .brand-sub { color: var(--text-faint); font-weight: 500; }
 .wrap-narrow { max-width: 46rem; }
 
-/* header language switch */
-.lang-switch {
-  font-size: .85rem !important; font-weight: 600 !important;
-  border: 1px solid var(--border-strong); border-radius: 100px;
-  padding: .3rem .75rem; color: var(--text-muted) !important;
+/* header language menu: EN · NL · RO as one segmented pill */
+.lang-menu {
+  display: inline-flex; align-items: stretch;
+  border: 1px solid var(--border-strong); border-radius: 100px; overflow: hidden;
 }
-.lang-switch:hover { border-color: var(--accent); color: var(--accent-text) !important; }
-.lang-switch.is-disabled { opacity: .45; cursor: default; }
+.site-nav .lang-menu .lang-switch {
+  font-size: .8rem; font-weight: 600; letter-spacing: .04em;
+  padding: .3rem .6rem; color: var(--text-muted); text-decoration: none;
+  border: 0; border-radius: 0;
+}
+.site-nav .lang-menu .lang-switch + .lang-switch { border-left: 1px solid var(--border); }
+.site-nav .lang-menu a.lang-switch:hover { color: var(--accent-text); background: var(--accent-soft); }
+.site-nav .lang-menu .is-current { color: var(--accent-text); background: var(--accent-soft); }
+.site-nav .lang-menu .is-disabled { opacity: .4; cursor: default; }
 @media (max-width: 860px) {
-  .site-nav .lang-switch { border: 0; padding: .8rem 0; border-bottom: 1px solid var(--border); border-radius: 0; }
+  .site-nav .lang-menu { align-self: flex-start; margin: .8rem 0; }
+  .site-nav .lang-menu .lang-switch { padding: .45rem .9rem; border-bottom: 0; font-size: .9rem; }
 }
 
 /* ---------- Index / tag pages ---------- */

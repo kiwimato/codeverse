@@ -251,14 +251,15 @@ posts/                              SOURCE — never deployed
 └── <slug>/
     ├── en.md                       -> https://blog.codeverse.nl/<slug>/
     ├── nl.md                       -> https://blog.codeverse.nl/nl/<slug>/
-    └── *.jpg / *.png               photos, shared by both languages
+    ├── ro.md                       -> https://blog.codeverse.nl/ro/<slug>/
+    └── *.jpg / *.png               photos, shared by all languages
 
 blog/                               OUTPUT — the deploy root, fully regenerated each build
-├── index.html  /nl/index.html      post lists (EN at the root, NL under /nl/)
-├── <slug>/  /nl/<slug>/            one page per language, hreflang-linked
-├── tag/<tag>/  /nl/tag/<tag>/      one page per topic; the two in the nav are `repair`
+├── index.html  /nl/ /ro/           post lists (EN at the root, NL and RO under /nl/, /ro/)
+├── <slug>/  /nl/<slug>/ /ro/…      one page per language, hreflang-linked
+├── tag/<tag>/  /nl/… /ro/…         one page per topic; the two in the nav are `repair`
 │                                   ("Repair corner") and `opensource` ("Open source")
-├── feed.xml  /nl/feed.xml          RSS, one per language
+├── feed.xml  /nl/… /ro/feed.xml    RSS, one per language
 ├── sitemap.xml                     with xhtml:link language alternates
 ├── _headers                        generated — CSP hashes for the JSON-LD are computed here
 └── 404.html, robots.txt, assets/, favicon.*
@@ -266,9 +267,10 @@ blog/                               OUTPUT — the deploy root, fully regenerate
 
 ### Writing a post
 
-Make `posts/<slug>/` (lowercase and dashes — it becomes the URL), write `en.md` and/or
-`nl.md`, drop the photos next to them. A post may exist in one language only; the other
-language's switcher then says so instead of linking to a 404.
+Make `posts/<slug>/` (lowercase and dashes — it becomes the URL), write `en.md`, `nl.md`
+and/or `ro.md`, drop the photos next to them. A post may exist in any subset of the three
+languages; the header's language menu shows a missing one as disabled instead of linking
+to a 404.
 
 ```markdown
 ---
@@ -289,7 +291,7 @@ HTML comments <!-- like this --> are stripped, so use them for notes to yourself
 ```
 
 Images are referenced relative to the post directory and rewritten to absolute URLs, so
-the same file serves both languages. The build warns about any image that does not exist.
+the same file serves every language. The build warns about any image that does not exist.
 
 ### Categories
 

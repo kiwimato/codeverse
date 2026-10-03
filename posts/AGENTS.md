@@ -9,7 +9,8 @@ working checklist.
 ```
 posts/<slug>/en.md        -> https://blog.codeverse.nl/<slug>/
 posts/<slug>/nl.md        -> https://blog.codeverse.nl/nl/<slug>/
-posts/<slug>/*.jpg|png    -> https://blog.codeverse.nl/<slug>/<file>   (shared by both languages)
+posts/<slug>/ro.md        -> https://blog.codeverse.nl/ro/<slug>/
+posts/<slug>/*.jpg|png    -> https://blog.codeverse.nl/<slug>/<file>   (shared by all languages)
 tools/build-blog.py       the generator: Markdown -> HTML, feeds, sitemap, tag pages, _headers
 tools/blog.css            blog-only styles, layered on the main site's site/assets/css/style.css
 blog/                     OUTPUT. Wiped and rewritten on every build. Never edit it, never
@@ -19,19 +20,20 @@ blog/                     OUTPUT. Wiped and rewritten on every build. Never edit
 * `posts/` is the only source. `blog/` is the Cloudflare Pages deploy root.
 * Zero dependencies. The generator is plain Python 3 with its own small Markdown
   converter. Do not add a pip package or a framework; the main site has the same rule.
-* English is the default language (root URLs, `x-default`). Dutch lives under `/nl/`.
-  A post may exist in one language only; the other language's switcher then shows a
-  disabled "not available" state instead of a dead link.
-* The slug is the directory name and becomes the URL in both languages. Lowercase,
-  digits and dashes only. It should read well in English; do not translate it for `nl`.
+* Three languages, listed in `LANGS` in `tools/build-blog.py`. English is the default
+  (root URLs, `x-default`); Dutch lives under `/nl/` and Romanian under `/ro/`. A post
+  may exist in any subset; the header's EN · NL · RO menu shows a missing language as
+  disabled instead of linking to a 404.
+* The slug is the directory name and becomes the URL in every language. Lowercase,
+  digits and dashes only. It should read well in English; do not translate it for `nl` or `ro`.
 * The page `<h1>` is the front-matter `title`. Inside the body `#` and `##` both become
   `<h2>`, `###` becomes `<h3>`, and so on.
 
 ## Writing a post
 
-1. `mkdir posts/<slug>/` and write `en.md`, then `nl.md` with the same sections in the
-   same order. Translate meaning, not word for word; Dutch should read as written by a
-   Dutch speaker, not as a machine translation.
+1. `mkdir posts/<slug>/` and write `en.md`, then `nl.md` and `ro.md` with the same
+   sections in the same order. Translate meaning, not word for word; each should read as
+   written by a native speaker, not as a machine translation.
 2. Photos go next to the Markdown. Strip metadata first; phone photos carry GPS:
 
    ```bash
@@ -92,7 +94,7 @@ title becomes the caption:
 ```
 
 Image and link paths that are not absolute are resolved against the post's own URL, so
-`photo.jpg` works from both the English and the Dutch page. A literal ` -- ` becomes an
+`photo.jpg` works from every language's page. A literal ` -- ` becomes an
 em dash. A block that starts with an HTML tag on its own line (`<details>`, `<div>`,
 `<table>`, `<video>`, …) is passed through raw until the next blank line. HTML comments
 are stripped and never reach the page; use them for notes to yourself.
@@ -109,7 +111,7 @@ A category is a tag. Three things in `tools/build-blog.py` control them:
 * `TAG_INTRO` — optional blurb per tag, used as the tag page's lede and meta
   description. Worth writing for any category that should rank.
 * `NAV_TAGS` — tags promoted to the header navigation, in order. Each needs a
-  `nav_<slug>` label in `UI` for both languages or the build fails with `KeyError`.
+  `nav_<slug>` label in `UI` for every language or the build fails with `KeyError`.
   A tag with nothing published in a language is dropped from that language's nav.
 
 Current categories: `repair` (Repair corner / Reparatiehoek) and `opensource` are in
@@ -131,12 +133,16 @@ the nav; `bakfiets`, `cloud`, `homelab`, `notes` are plain tags.
 * **No personal contact details.** No email address or phone number anywhere in a
   post. The header's "Work with me" link goes to codeverse.nl, which handles that.
 * **No invented links.** Only link to pages that exist. Internal links are
-  root-relative (`/other-post/`, `/nl/other-post/`).
-* **Both languages or neither for facts.** If a detail changes in `en.md`, change it in
-  `nl.md` in the same edit. The two files should stay parallel section for section.
+  root-relative (`/other-post/`, `/nl/other-post/`, `/ro/other-post/`).
+* **All languages or none for facts.** If a detail changes in `en.md`, change it in
+  `nl.md` and `ro.md` in the same edit. The files stay parallel section for section.
+  HTML comments (TODO/CONFIRM notes) live in `en.md` only.
 * Dutch style: informal, direct, "je" not "u". Technical terms that Dutch engineers use
   in English stay in English (Terraform, pull request, pipeline); everyday words are
   Dutch (bakfiets, stang, huls, loodgieter).
+* Romanian style: informal "tu", correct diacritics with the comma-below letters ș ț
+  (never the cedilla forms ş ţ), decimal comma in prose numbers (11,8 kWp). English
+  technical terms Romanian engineers use stay in English (Modbus-TCP, proxy, firmware).
 
 ## Changing the generator
 

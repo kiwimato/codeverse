@@ -1,16 +1,10 @@
 ---
-title: Drie afgedankte UniFi-accesspoints nieuw leven in met OpenWrt en OpenWISP
+title: Drie afgedankte UniFi-accesspoints nieuw leven inblazen met OpenWrt en OpenWISP
 description: Drie eerste-generatie UniFi-AP's, laatst gepatcht in 2021, draaien nu OpenWrt 25.12 onder self-hosted OpenWISP: centrale config, monitoring, roaming.
 date: 2026-10-03
 tags: homelab, opensource
-draft: true
+image: unifi-ap-gen1.jpg
 ---
-
-<!--
-  TODO voor publicatie:
-  - een screenshot van het OpenWISP-dashboard met de drie APs en monitoringdata
-  - eventueel een foto van de drie UniFi-APs / de AP die via serieel geflasht wordt
--->
 
 Het huis in Roemenië draait op drie eerste-generatie UniFi-accesspoints: een UAP, een
 UAP-Pro en een UAP-Outdoor+. Prima hardware, maar Ubiquiti stopte bij firmware
@@ -19,6 +13,8 @@ controller die ze nog adopteert is 6.0.45, en die is zelf ook al jaren oud. Dan 
 de gebruikelijke keuze voor oud spul dat het nog prima doet: de container in, of een
 actueel besturingssysteem erop. Ik heb alle drie geflasht naar OpenWrt 25.12 en onder één
 self-hosted OpenWISP gezet.
+
+![Een ronde witte UniFi-AP van de eerste generatie naast de doos, de PoE-adapter en de stroomkabel](unifi-ap-gen1.jpg "Een UniFi-AP van de eerste generatie, hetzelfde model als de gewone UAP hier. Niet mijn exemplaar: foto door [L3u](https://commons.wikimedia.org/wiki/File:Ubiquiti_Unifi_AP.jpg), CC0, via Wikimedia Commons.")
 
 ## De drie accesspoints
 
@@ -115,6 +111,8 @@ Met alleen OpenWrt moet je op drie AP's één voor één inloggen via SSH.
 [OpenWISP](https://openwisp.org) is de andere helft: een self-hosted controller, in Docker
 op de huisserver, die ze als vloot beheert.
 
+![De apparatenlijst in OpenWISP met UAP-942c, UAP-Outdoor-d220 en UAP-Pro-10a6, alle drie op de OpenWrt-backend met status OK en configuratie toegepast](openwisp-devices.png "Alle drie de AP's in OpenWISP: status OK, configuratie toegepast. MAC-adressen vervaagd.")
+
 - Je hebt één dashboard voor drie verschillende modellen. De oude UniFi-controller sprak
   alleen met UniFi-hardware en was zelf bevroren op een release uit 2021. OpenWISP maakt
   het niet uit wat het apparaat is, alleen dat het de agent draait.
@@ -137,6 +135,8 @@ zien zat er niet in. Ik heb dat toegevoegd met een kleine DHCP/ARP-snooper op de
 een paar velden op de server, en het als branches gepusht tegen het bijbehorende
 [upstream-issue](https://github.com/openwisp/openwisp-monitoring/issues/629). Bij een
 dichtgetimmerd apparaat had ik een verzoek ingediend en afgewacht.
+
+![Lijst met wifi-sessies in OpenWISP, met hostnaam, IP-adres en fabrikant ingevuld voor clients op UAP-942c en UAP-Pro-10a6](openwisp-wifi-sessions.png "Wifi-sessies met hostnamen en IP-adressen, afkomstig van de snooper. De omvormer (SUN2000) ging op 3 oktober over van UAP-942c naar de Pro. MAC-adressen vervaagd.")
 
 ## Wat ik mezelf aan het begin had willen vertellen
 
